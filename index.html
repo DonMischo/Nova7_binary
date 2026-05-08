@@ -373,88 +373,120 @@ body{
 
 </div><!-- /app -->
 <script>
+
 // ═══════════════════════════════════════════════════ DATA
 const GD = {
-  Satellit:{n:1,diff:'LEICHT',bits:5,col:'#0044aa',mis:'SAT-01',
-    pows:[16,8,4,2,1],max:31,
-    a1:[5,9,13],  a1s:[[4,1],[8,1],[8,4,1]],
+  Satellit:{n:1,diff:'LEICHT',bits:5,col:'#0044aa',mis:'SAT-01',pows:[16,8,4,2,1],max:31,
+    a1:[5,9,13],a1s:[[4,1],[8,1],[8,4,1]],
     a2:[3,12,21],
-    a3b:['01010','11001'],  a3d:[10,25],
-    a4d:[7,20],             a4b:['00111','10100'],
-    sec:'OK!', L1:'2721',L2:'35',L3:'33'},
-  Komet:{n:2,diff:'LEICHT',bits:5,col:'#006633',mis:'KOM-02',
-    pows:[16,8,4,2,1],max:31,
-    a1:[6,11,14], a1s:[[4,2],[8,2,1],[8,4,2]],
+    a3b:['01010','11001','01011'],  a3d:[10,25,11],
+    a4d:[7,20,18], a4b:['00111','10100','10010'],
+    sec:'OK!'},
+  Komet:{n:2,diff:'LEICHT',bits:5,col:'#006633',mis:'KOM-02',pows:[16,8,4,2,1],max:31,
+    a1:[6,11,14],a1s:[[4,2],[8,2,1],[8,4,2]],
     a2:[4,15,22],
-    a3b:['01100','10101'],  a3d:[12,21],
-    a4d:[3,17],             a4b:['00011','10001'],
-    sec:'HI!', L1:'3142',L2:'33',L3:'33'},
-  Meteor:{n:3,diff:'MITTEL',bits:6,col:'#aa4400',mis:'MET-03',
-    pows:[32,16,8,4,2,1],max:63,
+    a3b:['01100','10101','10100'],  a3d:[12,21,20],
+    a4d:[3,17,19], a4b:['00011','10001','10011'],
+    sec:'HI!'},
+  Meteor:{n:3,diff:'MITTEL',bits:6,col:'#aa4400',mis:'MET-03',pows:[32,16,8,4,2,1],max:63,
     a1:[13,22,37],a1s:[[8,4,1],[16,4,2],[32,4,1]],
     a2:[9,28,50],
-    a3b:['011010','101100'],a3d:[26,44],
-    a4d:[19,51],            a4b:['010011','110011'],
-    sec:'GO!', L1:'7230',L2:'70',L3:'33'},
-  Planet:{n:4,diff:'MITTEL',bits:6,col:'#770077',mis:'PLA-04',
-    pows:[32,16,8,4,2,1],max:63,
+    a3b:['011010','101100','001010'],  a3d:[26,44,10],
+    a4d:[19,51,25], a4b:['010011','110011','011001'],
+    sec:'GO!'},
+  Planet:{n:4,diff:'MITTEL',bits:6,col:'#770077',mis:'PLA-04',pows:[32,16,8,4,2,1],max:63,
     a1:[11,25,42],a1s:[[8,2,1],[16,8,1],[32,8,2]],
     a2:[6,30,55],
-    a3b:['010110','101010'],a3d:[22,42],
-    a4d:[15,38],            a4b:['001111','100110'],
-    sec:'ACE!',L1:'7845',L2:'64',L3:'34'},
-  Asteroid:{n:5,diff:'MITTEL',bits:6,col:'#884400',mis:'AST-05',
-    pows:[32,16,8,4,2,1],max:63,
+    a3b:['010110','101010','100101'],  a3d:[22,42,37],
+    a4d:[15,38,18], a4b:['001111','100110','010010'],
+    sec:'ACE!'},
+  Asteroid:{n:5,diff:'MITTEL',bits:6,col:'#884400',mis:'AST-05',pows:[32,16,8,4,2,1],max:63,
     a1:[14,27,45],a1s:[[8,4,2],[16,8,2,1],[32,8,4,1]],
     a2:[3,18,60],
-    a3b:['011100','100101'],a3d:[28,37],
-    a4d:[21,55],            a4b:['010101','110111'],
-    sec:'FUN!',L1:'8620',L2:'65',L3:'34'},
-  Nebel:{n:6,diff:'MITTEL',bits:6,col:'#006666',mis:'NEB-06',
-    pows:[32,16,8,4,2,1],max:63,
+    a3b:['011100','100101','100110'],  a3d:[28,37,38],
+    a4d:[21,55,12], a4b:['010101','110111','001100'],
+    sec:'FUN!'},
+  Nebel:{n:6,diff:'MITTEL',bits:6,col:'#006666',mis:'NEB-06',pows:[32,16,8,4,2,1],max:63,
     a1:[17,29,46],a1s:[[16,1],[16,8,4,1],[32,8,4,2]],
     a2:[5,36,57],
-    a3b:['010101','110010'],a3d:[21,50],
-    a4d:[25,59],            a4b:['011001','111011'],
-    sec:'CODE!',L1:'9227',L2:'71',L3:'35'},
-  Galaxie:{n:7,diff:'SCHWER',bits:8,col:'#003388',mis:'GAL-07',
-    pows:[128,64,32,16,8,4,2,1],max:255,
+    a3b:['010101','110010','110100'],  a3d:[21,50,52],
+    a4d:[25,59,45], a4b:['011001','111011','101101'],
+    sec:'CODE!'},
+  Galaxie:{n:7,diff:'SCHWER',bits:8,col:'#003388',mis:'GAL-07',pows:[128,64,32,16,8,4,2,1],max:255,
     a1:[37,91,154],a1s:[[32,4,1],[64,16,8,2,1],[128,16,8,2]],
     a2:[25,78,200],
-    a3b:['01011010','11001100'],a3d:[90,204],
-    a4d:[73,182],              a4b:['01001001','10110110'],
-    sec:'NOVA!',L1:'8240',L2:'94',L3:'35'},
-  Pulsar:{n:8,diff:'SCHWER',bits:8,col:'#550055',mis:'PUL-08',
-    pows:[128,64,32,16,8,4,2,1],max:255,
+    a3b:['01011010','11001100','11100011'],  a3d:[90,204,227],
+    a4d:[73,182,201], a4b:['01001001','10110110','11001001'],
+    sec:'NOVA!'},
+  Pulsar:{n:8,diff:'SCHWER',bits:8,col:'#550055',mis:'PUL-08',pows:[128,64,32,16,8,4,2,1],max:255,
     a1:[45,107,163],a1s:[[32,8,4,1],[64,32,8,2,1],[128,32,2,1]],
     a2:[30,85,190],
-    a3b:['01101101','11010101'],a3d:[109,213],
-    a4d:[58,199],              a4b:['00111010','11000111'],
-    sec:'STAR!',L1:'1540',L2:'22',L3:'35'},
+    a3b:['01101101','11010101','01110111'],  a3d:[109,213,119],
+    a4d:[58,199,111], a4b:['00111010','11000111','01101111'],
+    sec:'STAR!'},
 };
 
 // ═══════════════════════════════════════════════════ STATE
 let G=null, GN='', step=0;
-// steps: 0=home, 1=intro, 2=A1erkl, 3=A1aufg, 4=A2erkl, 5=A2aufg,
-//        6=code1, 7=A3erkl, 8=A3aufg, 9=A4erkl, 10=A4aufg,
-//        11=code2, 12=A5erkl, 13=A5aufg, 14=A6erkl, 15=A6aufg,
-//        16=code3, 17=final
-const TOTAL=16;
-
-// Toggle state per widget id: Map<widgetId, bits[]>
+// 0=home 1=intro
+// 2=S1T1e 3=S1T1a  4=S1T2e 5=S1T2a  6=S1T3e 7=S1T3a  8=S1T4e 9=S1T4a
+// 10=code1
+// 11=S2T1e 12=S2T1a  13=S2T2e 14=S2T2a
+// 15=code2
+// 16=S3T1e 17=S3T1a  18=S3T2e 19=S3T2a
+// 20=code3  21=final
+const TOTAL=20;
 const WS={};
 
-// ═══════════════════════════════════════════════════ SESSION MEMORY
-// Stores widget state and text inputs per step so navigating back restores them.
-// SESSION[groupName][step] = { widgets:{wid:[bits],...}, inputs:{id:value,...} }
+// Code digits unlocked by each task. Randomised at group pick time.
+// CODES[stageIdx][taskIdx] = {digit: '0'..'9', unlocked: bool}
+let CODES=[];
+function freshCodes(){
+  return [
+    [{digit:rdig(),unlocked:false},{digit:rdig(),unlocked:false},{digit:rdig(),unlocked:false},{digit:rdig(),unlocked:false}],
+    [{digit:rdig(),unlocked:false},{digit:rdig(),unlocked:false}],
+    [{digit:rdig(),unlocked:false},{digit:rdig(),unlocked:false}],
+  ];
+}
+function rdig(){return String(Math.floor(Math.random()*10));}
+function stageCode(si){return CODES[si].map(t=>t.digit).join('');}
+
 const SESSION={};
+
+// ═══════════════════════════════════════════════════ SESSION MEMORY
+function sessionSave(){
+  if(!GN||!step)return;
+  if(!SESSION[GN])SESSION[GN]={};
+  const widgets={};
+  Object.entries(WS).forEach(([wid,bits])=>{widgets[wid]=[...bits];});
+  const inputs={}, inputColors={};
+  document.querySelectorAll('#sc-dyn input').forEach(el=>{
+    if(!el.id)return;
+    inputs[el.id]=el.value;
+    if(el.style.borderColor)inputColors[el.id]=el.style.borderColor;
+    if(el.style.background)inputColors[el.id+'__bg']=el.style.background;
+    if(el.style.color)inputColors[el.id+'__col']=el.style.color;
+  });
+  const feedbacks={};
+  document.querySelectorAll('#sc-dyn [id$="-fb"]').forEach(el=>{
+    if(el.id&&el.textContent)feedbacks[el.id]={text:el.textContent,color:el.style.color};
+  });
+  const slots={};
+  document.querySelectorAll('#sc-dyn .slot[id^="slot-"]').forEach(el=>{
+    slots[el.id]={html:el.innerHTML,cls:el.className};
+  });
+  const checkBtns={};
+  document.querySelectorAll('#sc-dyn button[id^="chk-"]').forEach(el=>{
+    checkBtns[el.id]={outerHTML:el.outerHTML};
+  });
+  SESSION[GN][step]={widgets,inputs,inputColors,feedbacks,slots,checkBtns,codes:JSON.parse(JSON.stringify(CODES))};
+}
 
 function sessionRestore(){
   if(!GN||!step)return;
   const saved=SESSION[GN]?.[step];
   if(!saved)return;
-
-  // Restore widget states
+  if(saved.codes)CODES=JSON.parse(JSON.stringify(saved.codes));
   if(saved.widgets){
     Object.entries(saved.widgets).forEach(([wid,bits])=>{
       WS[wid]=[...bits];
@@ -463,1159 +495,898 @@ function sessionRestore(){
       const pows=[...container.querySelectorAll('.bw-pow')].map(el=>parseInt(el.textContent));
       bits.forEach((b,i)=>{
         const el=document.getElementById(`${wid}-b${i}`);
-        if(el&&!el.classList.contains('ro')){
-          el.textContent=b;
-          el.classList.toggle('on',b===1);
-        }
+        if(el&&!el.classList.contains('ro')){el.textContent=b;el.classList.toggle('on',b===1);}
       });
       const sum=bits.reduce((a,v,i)=>a+v*(pows[i]||0),0);
       const sumEl=document.getElementById(`${wid}-sum`);
       if(sumEl)sumEl.textContent=sum;
       const tc=document.getElementById(`${wid}-tc`);
-      if(tc){
-        const t=parseInt(tc.dataset.t||'0');
-        tc.className=`rt ${sum===t?'hit':'miss'}`;
-        tc.textContent=sum===t?'✓ Treffer!':'Ziel: '+t;
-      }
+      if(tc){const t=parseInt(tc.dataset.t||'0');tc.className=`rt ${sum===t?'hit':'miss'}`;tc.textContent=sum===t?'✓ Treffer!':'Ziel: '+t;}
     });
   }
-
-  // Restore text inputs + re-apply their visual state
   if(saved.inputs){
     Object.entries(saved.inputs).forEach(([id,val])=>{
-      const el=document.getElementById(id);
-      if(!el||val===undefined)return;
+      const el=document.getElementById(id); if(!el||val===undefined)return;
       el.value=val;
-      const brd=saved.inputColors?.[id];
-      const bg=saved.inputColors?.[id+'__bg'];
-      const col=saved.inputColors?.[id+'__col'];
-      if(brd)el.style.borderColor=brd;
-      if(bg)el.style.background=bg;
-      if(col)el.style.color=col;
+      const brd=saved.inputColors?.[id]; const bg=saved.inputColors?.[id+'__bg']; const col=saved.inputColors?.[id+'__col'];
+      if(brd)el.style.borderColor=brd; if(bg)el.style.background=bg; if(col)el.style.color=col;
     });
   }
-
-  // Restore feedback text
-  if(saved.feedbacks){
-    Object.entries(saved.feedbacks).forEach(([id,{text,color}])=>{
+  if(saved.feedbacks){Object.entries(saved.feedbacks).forEach(([id,{text,color}])=>{const el=document.getElementById(id);if(el){el.textContent=text;el.style.color=color;}});}
+  if(saved.slots){Object.entries(saved.slots).forEach(([id,{html,cls}])=>{const el=document.getElementById(id);if(el){el.innerHTML=html;el.className=cls;}});}
+  if(saved.checkBtns){
+    Object.entries(saved.checkBtns).forEach(([id,{outerHTML}])=>{
       const el=document.getElementById(id);
-      if(el){el.textContent=text;el.style.color=color;}
+      if(el){const tmp=document.createElement('div');tmp.innerHTML=outerHTML;el.replaceWith(tmp.firstChild);}
     });
   }
-
-  // Restore slot states (A6 character boxes)
-  if(saved.slots){
-    Object.entries(saved.slots).forEach(([id,{html,cls}])=>{
-      const el=document.getElementById(id);
-      if(el){el.innerHTML=html;el.className=cls;}
-    });
-  }
-}
-
-// Extended sessionSave that also captures visual feedback state
-function sessionSave(){
-  if(!GN||!step)return;
-  if(!SESSION[GN])SESSION[GN]={};
-  const widgets={};
-  Object.entries(WS).forEach(([wid,bits])=>{widgets[wid]=[...bits];});
-
-  const inputs={}, inputColors={};
-  document.querySelectorAll('#sc-dyn input')
-    .forEach(el=>{
-      if(!el.id)return;
-      inputs[el.id]=el.value;
-      if(el.style.borderColor)inputColors[el.id]=el.style.borderColor;
-      if(el.style.background)inputColors[el.id+'__bg']=el.style.background;
-      if(el.style.color)inputColors[el.id+'__col']=el.style.color;
-    });
-
-  // Save feedback texts (elements ending in -fb)
-  const feedbacks={};
-  document.querySelectorAll('#sc-dyn [id$="-fb"]').forEach(el=>{
-    if(el.id&&el.textContent)feedbacks[el.id]={text:el.textContent,color:el.style.color};
-  });
-
-  // Save slot states (A6 character reveal boxes)
-  const slots={};
-  document.querySelectorAll('#sc-dyn .slot[id^="slot-"]').forEach(el=>{
-    slots[el.id]={html:el.innerHTML,cls:el.className};
-  });
-
-  SESSION[GN][step]={widgets,inputs,inputColors,feedbacks,slots};
 }
 
 // ═══════════════════════════════════════════════════ COLOR
 function gc(col){
   const r=document.documentElement;
   r.style.setProperty('--gc',col);
-  const lum=hexLum(col);
-  r.style.setProperty('--gc2',lum>0.4?darken(col,20):lighten(col,30));
+  function hexRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+  function lighten(h,p){return'#'+hexRgb(h).map(c=>Math.min(255,Math.round(c+(255-c)*p/100)).toString(16).padStart(2,'0')).join('');}
   r.style.setProperty('--gc-bg',lighten(col,90));
   document.getElementById('hd').style.borderBottomColor=col;
 }
-function hexLum(h){const[r,g,b]=hexRgb(h);return(.299*r+.587*g+.114*b)/255;}
-function hexRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
-function lighten(h,pct){return '#'+hexRgb(h).map(c=>Math.min(255,Math.round(c+(255-c)*pct/100)).toString(16).padStart(2,'0')).join('');}
-function darken(h,pct){return '#'+hexRgb(h).map(c=>Math.max(0,Math.round(c*(1-pct/100))).toString(16).padStart(2,'0')).join('');}
 
 // ═══════════════════════════════════════════════════ BIT WIDGET
-// Creates a toggle bit-widget and returns its HTML string.
-// wid = unique id, pows = power array, target = null|number (show result vs target)
-// readonly = show filled bits without toggle (for examples)
-// bits = initial bit array (optional)
-function bwHtml(wid, pows, {target=null, readonly=false, label='', bits=null}={}){
-  const initBits = bits || pows.map(()=>0);
-  WS[wid] = [...initBits];
-  const cells = pows.map((pw,i)=>`
+function bwToggleable(wid,pows,target){
+  WS[wid]=pows.map(()=>0);
+  const cells=pows.map((pw,i)=>`
     <div class="bw-cell">
       <div class="bw-pow">${pw}</div>
-      <div class="bw-bit${initBits[i]?' on':''}${readonly?' readonly':''}"
-        id="${wid}-b${i}"
-        ${readonly?'':` onclick="bwToggle('${wid}',${i},${pows.join(',')})"`}
-        role="${readonly?'':'button'}"
-        tabindex="${readonly?'-1':'0'}"
-        ${readonly?'':'onkeydown="if(event.key===\'Enter\'||event.key===\' \')bwToggle(\''+wid+'\','+i+','+pows.join(',')+')"'}
-      >${initBits[i]}</div>
-    </div>`).join('');
-
-  const sum = initBits.reduce((a,b,i)=>a+b*pows[i],0);
-  const tClass = target===null?'neutral':sum===target?'hit':'miss';
-  const tLabel = target===null?`Summe: <span class="rval" id="${wid}-sum">${sum}</span>`
-    :`Summe: <span class="rval" id="${wid}-sum">${sum}</span>
-      <span class="rtarget ${tClass}" id="${wid}-tc">
-        ${sum===target?'✓ Treffer!':'Ziel: '+target}
-      </span>`;
-
-  return `<div class="bw-wrap">
-    ${label?`<div class="bw-label">${label}</div>`:''}
-    <div class="bw" id="${wid}">${cells}</div>
-    <div class="bw-result" id="${wid}-res">${tLabel}</div>
-  </div>`;
-}
-
-function bwToggle(wid, idx, ...pows){
-  WS[wid][idx] ^= 1;
-  const bit = WS[wid][idx];
-  const el = document.getElementById(`${wid}-b${idx}`);
-  el.textContent = bit;
-  el.classList.toggle('on', bit===1);
-  // update sum
-  const sum = WS[wid].reduce((a,b,i)=>a+b*pows[i],0);
-  const sumEl = document.getElementById(`${wid}-sum`);
-  if(sumEl) sumEl.textContent = sum;
-  // update target indicator
-  const tcEl = document.getElementById(`${wid}-tc`);
-  if(tcEl){
-    const tgt = parseInt(tcEl.dataset.target||tcEl.textContent.replace(/\D/g,''));
-    // re-read target from element class logic
-    const res = document.getElementById(`${wid}-res`);
-    // find target in DOM: rtarget element
-    const rt = res?.querySelector('.rtarget');
-    if(rt){
-      const t = parseInt(rt.dataset.t);
-      rt.className = `rtarget ${sum===t?'hit':'miss'}`;
-      rt.textContent = sum===t?'✓ Treffer!':'Ziel: '+t;
-    }
-  }
-}
-
-// Helper to embed target in DOM for toggle callback
-function bwHtmlT(wid, pows, target, label=''){
-  const initBits = pows.map(()=>0);
-  WS[wid] = [...initBits];
-  const cells = pows.map((pw,i)=>`
-    <div class="bw-cell">
-      <div class="bw-pow">${pw}</div>
-      <div class="bw-bit" id="${wid}-b${i}"
-        onclick="bwToggleT('${wid}',${i},[${pows}],${target})"
-        role="button" tabindex="0"
-        onkeydown="if(event.key==='Enter'||event.key===' ')bwToggleT('${wid}',${i},[${pows}],${target})"
-      >0</div>
+      <div class="bw-bit" id="${wid}-b${i}" tabindex="0" role="button"
+        onclick="bwT('${wid}',${i},[${pows}],${target})"
+        onkeydown="if(event.key==='Enter'||event.key===' ')bwT('${wid}',${i},[${pows}],${target})">0</div>
     </div>`).join('');
   return `<div class="bw-wrap">
-    ${label?`<div class="bw-label">${label}</div>`:''}
+    <div class="bw-lbl">SCHALTE DIE PAKETE AN/AUS:</div>
     <div class="bw" id="${wid}">${cells}</div>
-    <div class="bw-result" id="${wid}-res">
-      Summe: <span class="rval" id="${wid}-sum">0</span>
-      <span class="rtarget neutral" id="${wid}-tc" data-t="${target}">Ziel: ${target}</span>
+    <div class="bw-res" id="${wid}-res">
+      Summe: <span class="rv" id="${wid}-sum">0</span>
+      <span class="rt neu" id="${wid}-tc" data-t="${target}">Ziel: ${target}</span>
     </div>
   </div>`;
 }
-
-function bwToggleT(wid, idx, pows, target){
-  WS[wid][idx] ^= 1;
-  const bit = WS[wid][idx];
-  document.getElementById(`${wid}-b${idx}`).textContent = bit;
-  document.getElementById(`${wid}-b${idx}`).classList.toggle('on', bit===1);
-  const sum = WS[wid].reduce((a,v,i)=>a+v*pows[i],0);
-  document.getElementById(`${wid}-sum`).textContent = sum;
-  const tc = document.getElementById(`${wid}-tc`);
-  tc.className = `rtarget ${sum===target?'hit':'miss'}`;
-  tc.textContent = sum===target?'✓ Treffer!':'Ziel: '+target;
+function bwT(wid,idx,pows,target){
+  WS[wid][idx]^=1;
+  const b=WS[wid][idx];
+  const el=document.getElementById(`${wid}-b${idx}`);
+  el.textContent=b; el.classList.toggle('on',b===1);
+  const sum=WS[wid].reduce((a,v,i)=>a+v*pows[i],0);
+  document.getElementById(`${wid}-sum`).textContent=sum;
+  const tc=document.getElementById(`${wid}-tc`);
+  tc.className=`rt ${sum===target?'hit':'miss'}`;
+  tc.textContent=sum===target?'✓ Treffer!':'Ziel: '+target;
 }
-
-function bwSum(wid, pows){ return WS[wid]?.reduce((a,v,i)=>a+v*pows[i],0)??0; }
-function bwBits(wid){ return WS[wid]||[]; }
-function bwOnes(wid){ return (WS[wid]||[]).filter(b=>b===1).length; }
-
-// readonly widget (example display)
-function bwReadonly(pows, bits, label=''){
-  const cells = pows.map((pw,i)=>`
+function bwRO(pows,bits,label=''){
+  const cells=pows.map((pw,i)=>`
     <div class="bw-cell">
       <div class="bw-pow">${pw}</div>
-      <div class="bw-bit readonly${bits[i]?' on':''}">${bits[i]}</div>
+      <div class="bw-bit ro${bits[i]?' on':''}">${bits[i]}</div>
     </div>`).join('');
-  const sum = bits.reduce((a,v,i)=>a+v*pows[i],0);
-  return `<div class="bw-wrap">
-    ${label?`<div class="bw-label">${label}</div>`:''}
-    <div class="bw">${cells}</div>
-    <div class="bw-result">Ergebnis: <span class="rval">${sum}</span></div>
-  </div>`;
+  const sum=bits.reduce((a,v,i)=>a+v*pows[i],0);
+  return `<div class="bw-wrap">${label?`<div class="bw-lbl">${label}</div>`:''}<div class="bw">${cells}</div>
+    <div class="bw-res">Ergebnis: <span class="rv">${sum}</span></div></div>`;
+}
+function bwSum(wid,pows){return(WS[wid]||[]).reduce((a,v,i)=>a+v*pows[i],0);}
+function binBits(b){return b.split('').map(Number);}
+function bitStr(n,bits){return n.toString(2).padStart(bits,'0');}
+
+// ═══════════════════════════════════════════════════ CHECK BUTTON UI
+function markCheckBtn(btnId,si,ti){
+  const btn=document.getElementById(btnId); if(!btn)return;
+  CODES[si][ti].unlocked=true;
+  const d=CODES[si][ti].digit;
+  // Compact layout, no line-spacing issues
+  btn.innerHTML=`<span style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;line-height:1;display:block">CODEZIFFER</span><span style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;line-height:1;display:block">${d}</span>`;
+  btn.disabled=true;
+  btn.style.cssText=`background:var(--gn);color:#fff;border:none;min-width:80px;height:58px;
+    display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;padding:0 12px;border-radius:var(--rs);cursor:default;font-family:inherit`;
+}
+function checkBtnHtml(id,onclick){
+  return `<button id="${id}" class="btn btn-p"
+    style="background:var(--gc);min-width:80px;height:46px"
+    onclick="${onclick}">Prüfen</button>`;
 }
 
 // ═══════════════════════════════════════════════════ PROGRESS
-const STEP_LBLS=['','Gruppenintro','Stufe 1 · Erklärung','Stufe 1 · Aufgabe 1',
-  'Stufe 1 · Erklärung','Stufe 1 · Aufgabe 2','Code Stufe 1',
-  'Stufe 2 · Erklärung','Stufe 2 · Aufgabe 3','Stufe 2 · Erklärung','Stufe 2 · Aufgabe 4',
-  'Code Stufe 2','Stufe 3 · Einführung','Stufe 3 · Aufgabe 5',
-  'Stufe 3 · Erklärung','Stufe 3 · Aufgabe 6','Code Stufe 3'];
+const STEP_LBLS=['','Intro',
+  'Stufe 1 · Erklärung','Stufe 1 · Aufgabe 1',
+  'Stufe 1 · Erklärung','Stufe 1 · Aufgabe 2',
+  'Stufe 1 · Erklärung','Stufe 1 · Aufgabe 3',
+  'Stufe 1 · Erklärung','Stufe 1 · Aufgabe 4',
+  'Code Stufe 1',
+  'Stufe 2 · Erklärung','Stufe 2 · Aufgabe 5',
+  'Stufe 2 · Erklärung','Stufe 2 · Aufgabe 6',
+  'Code Stufe 2',
+  'Stufe 3 · ASCII','Stufe 3 · Aufgabe 7',
+  'Stufe 3 · Erklärung','Stufe 3 · Aufgabe 8',
+  'Code Stufe 3'];
 
-function updateProg(){
-  const prog=document.getElementById('prog');
-  if(step===0){prog.style.display='none';return;}
-  prog.style.display='block';
+function updProg(){
+  const p=document.getElementById('prog');
+  if(!step){p.style.display='none';return;}
+  p.style.display='block';
   const pct=Math.round(step/TOTAL*100);
   document.getElementById('prog-fill').style.width=pct+'%';
   document.getElementById('prog-pct').textContent=pct+'%';
   document.getElementById('prog-lbl').textContent=STEP_LBLS[step]||'';
-  // 7 dots for major milestones
-  const dots=document.getElementById('prog-dots');
-  const ms=[1,3,5,6,9,11,15,16];
-  dots.innerHTML=ms.map(m=>`<div class="pd${step>m?' done':step===m?' cur':''}"></div>`).join('');
+  const ms=[1,5,9,10,13,15,19,20];
+  document.getElementById('prog-dots').innerHTML=
+    ms.map(m=>`<div class="pd${step>m?' done':step===m?' cur':''}"></div>`).join('');
 }
 
 // ═══════════════════════════════════════════════════ NAV
-let fwdFn=null, backFn=null;
-function setNav({back=null,fwd=null,fwdLabel='Weiter →',backLabel='← Zurück',fwdPrimary=true}={}){
+let fFn=null,bFn=null;
+function setNav({back=null,fwd=null,fwdLbl='Weiter →',backLbl='← Zurück'}={}){
   const nav=document.getElementById('nav');
   const nb=document.getElementById('nav-back');
   const nf=document.getElementById('nav-fwd');
-  backFn=back; fwdFn=fwd;
-  nb.style.display=back?'inline-flex':'none';
-  nf.style.display=fwd?'inline-flex':'none';
-  nb.textContent=backLabel;
-  nf.textContent=fwdLabel;
-  nf.className='btn '+(fwdPrimary?'btn-p':'btn-s');
-  nf.style.background=fwdPrimary?G?.col||'var(--gc)':'';
-  nav.classList.toggle('on', !!(back||fwd));
+  bFn=back;fFn=fwd;
+  nb.style.display=back?'inline-flex':'none'; nf.style.display=fwd?'inline-flex':'none';
+  nb.textContent=backLbl; nf.textContent=fwdLbl;
+  nf.style.background=G?.col||'var(--gc)';
+  nav.classList.toggle('on',!!(back||fwd));
 }
-function navBack(){if(backFn)backFn();}
-function navFwd() {if(fwdFn) fwdFn();}
-
-// ═══════════════════════════════════════════════════ SCREENS
+function navBack(){if(bFn)bFn();}
+function navFwd(){if(fFn)fFn();}
 function showSc(id){
   document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
   document.getElementById(id).classList.add('on');
   document.getElementById('content').scrollTo({top:0,behavior:'smooth'});
 }
-function dynHtml(html){ document.getElementById('sc-dyn').innerHTML=html; showSc('sc-dyn'); }
+function dyn(html){document.getElementById('sc-dyn').innerHTML=html;showSc('sc-dyn');}
+function go(s){sessionSave();step=s;updProg();SCREENS[s]?.();requestAnimationFrame(()=>sessionRestore());}
 
 // ═══════════════════════════════════════════════════ HOME
 function buildHome(){
-  const grid=document.getElementById('gs-grid');
-  grid.innerHTML='';
-  const diffStyle={LEICHT:{bg:'#f0fdf4',c:'#15803d',b:'#86efac'},
-                   MITTEL:{bg:'#fff7ed',c:'#c2410c',b:'#fed7aa'},
-                   SCHWER:{bg:'#fef2f2',c:'#b91c1c',b:'#fca5a5'}};
-  Object.entries(GD).forEach(([name,g])=>{
-    const d=diffStyle[g.diff];
+  const g=document.getElementById('gs-grid'); g.innerHTML='';
+  const ds={LEICHT:{bg:'#f0fdf4',c:'#15803d',b:'#86efac'},MITTEL:{bg:'#fff7ed',c:'#c2410c',b:'#fed7aa'},SCHWER:{bg:'#fef2f2',c:'#b91c1c',b:'#fca5a5'}};
+  Object.entries(GD).forEach(([name,gd])=>{
+    const d=ds[gd.diff];
     const btn=document.createElement('button');
-    btn.className='gs-btn'; btn.setAttribute('aria-label','Gruppe '+name);
-    btn.style.cssText=`border-color:${g.col}44`;
-    btn.innerHTML=`
-      <div class="gs-circle" style="background:${g.col}22;border-color:${g.col}"></div>
-      <div class="gs-name" style="color:${g.col}">${name.toUpperCase()}</div>
-      <div class="gs-meta">${g.mis}</div>
-      <div class="gs-diff" style="background:${d.bg};color:${d.c};border:1px solid ${d.b}">${g.diff} · ${g.bits}Bit</div>`;
-    btn.addEventListener('pointerenter',()=>btn.style.borderColor=g.col);
-    btn.addEventListener('pointerleave',()=>btn.style.borderColor=g.col+'44');
-    btn.onclick=()=>selectGroup(name);
-    grid.appendChild(btn);
+    btn.className='gs-btn'; btn.style.borderColor=gd.col+'44';
+    btn.innerHTML=`<div class="gs-circle" style="background:${gd.col}22;border-color:${gd.col}"></div>
+      <div class="gs-name" style="color:${gd.col}">${name.toUpperCase()}</div>
+      <div class="gs-meta">${gd.mis}</div>
+      <div class="gs-diff" style="background:${d.bg};color:${d.c};border:1px solid ${d.b}">${gd.diff} · ${gd.bits}Bit</div>`;
+    btn.addEventListener('pointerenter',()=>btn.style.borderColor=gd.col);
+    btn.addEventListener('pointerleave',()=>btn.style.borderColor=gd.col+'44');
+    btn.onclick=()=>pick(name);
+    g.appendChild(btn);
   });
 }
-
 function goHome(){
-  G=null;GN='';step=0;
-  gc('#1d4ed8');
-  document.getElementById('hd-logo').textContent='◈ NOVA-7';
+  G=null;GN='';step=0;gc('#1d4ed8');
   document.getElementById('hd-grp').style.display='none';
   document.getElementById('hd-back').style.display='none';
-  updateProg();
-  setNav();
-  showSc('sc-home');
+  updProg();setNav();showSc('sc-home');
 }
-
-// ═══════════════════════════════════════════════════ GROUP SELECT
-function selectGroup(name){
-  G=GD[name]; GN=name; step=1;
-  // Clear session for this group (fresh start)
+function pick(name){
+  G=GD[name];GN=name;
+  CODES=freshCodes();
   SESSION[GN]={};
-  gc(G.col);
-  document.getElementById('hd-logo').textContent='◈ NOVA-7';
+  step=1;gc(G.col);
   document.getElementById('hd-grp').textContent=name.toUpperCase()+' · '+G.mis;
   document.getElementById('hd-grp').style.display='inline';
   document.getElementById('hd-back').style.display='inline';
-  updateProg();
-  renderIntro();
+  updProg();renderIntro();
 }
 
-// ═══════════════════════════════════════════════════ INTRO (step 1)
+// ═══════════════════════════════════════════════════ HELPERS
+function sigRow(b,pows){
+  return pows.map((pw,pi)=>`<div class="bw-cell">
+    <div class="bw-pow">${pw}</div>
+    <div class="bw-bit ro${b[pi]==='1'?' on':''}">${b[pi]}</div>
+  </div>`).join('');
+}
+function numInput(id,w=90){
+  return `<input type="text" inputmode="numeric" maxlength="4" id="${id}"
+    placeholder="?" autocomplete="off"
+    style="width:${w}px;height:48px;border:2px solid var(--brd);border-radius:var(--rs);
+    padding:0 14px;font-family:'Orbitron',monospace;font-size:20px;font-weight:700;
+    background:var(--panel2);color:var(--ink)" oninput="this.style.borderColor='var(--brd)'">`;
+}
+function charInput(id){
+  return `<input type="text" maxlength="1" id="${id}" placeholder="?" autocomplete="off"
+    style="width:52px;height:50px;text-align:center;font-family:'Orbitron',monospace;
+    font-size:22px;font-weight:900;border:2.5px solid var(--brd);border-radius:var(--rs);
+    background:var(--panel2);color:var(--ink)">`;
+}
+function setOk(id){
+  const el=document.getElementById(id); if(!el)return;
+  el.style.borderColor='var(--gn)'; el.style.background='var(--gn-bg)'; el.style.color='var(--gn)';
+}
+function setErr(id){
+  const el=document.getElementById(id); if(!el)return;
+  el.style.borderColor='var(--rd)'; el.style.background='var(--rd-bg)';
+}
+function setFb(id,text,ok){
+  const el=document.getElementById(id); if(!el)return;
+  el.textContent=text; el.style.color=ok?'var(--gn)':'var(--rd)';
+}
+function codeDisplay(si){
+  const labels=[['AUFG. 1','AUFG. 2','AUFG. 3','AUFG. 4'],['AUFG. 5','AUFG. 6'],['AUFG. 7','AUFG. 8']];
+  return `<div style="background:var(--panel2);border:1px solid var(--brd2);border-radius:var(--rs);
+    padding:14px 16px;margin-bottom:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    ${CODES[si].map((t,i)=>`
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:1px">${labels[si][i]}</div>
+        <div style="width:46px;height:46px;border-radius:6px;
+          border:2px solid ${t.unlocked?'var(--gn)':'var(--brd)'};
+          background:${t.unlocked?'var(--gn-bg)':'var(--panel3)'};
+          display:flex;align-items:center;justify-content:center;
+          font-family:'Orbitron',monospace;font-size:22px;font-weight:900;
+          color:${t.unlocked?'var(--gn)':'var(--ink4)'}">
+          ${t.unlocked?t.digit:'?'}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════ INTRO
 function renderIntro(){
-  step=1; updateProg();
-  const ex=G.a1[0], exC=G.a1s[0], exB=G.a4b[0].replace(/./g,'');// dummy
-  const exBin=bitStr(ex,G.bits);
-  const exBits=exBin.split('').map(Number);
-  const fpRows=[
-    [1,'A1+A2','Energiepakete kombinieren → erste Binärzahl','4-stelliger Code',G.col],
-    [2,'A3+A4',`Binär ↔ Dezimal (${G.bits}-Bit-System)`,'2-stelliger Code','#c2410c'],
-    [3,'A5+A6','ASCII-System → Geheimwort entschlüsseln','2-stelliger Code','#6d28d9'],
-  ];
-  dynHtml(`
+  const exB=bitStr(G.a1[0],G.bits);
+  dyn(`
     <div class="sbanner" style="border-color:${G.col}">
       <div class="sbanner-top" style="background:${G.col}">
         <div class="sbanner-num">!</div>
-        <div>
-          <div class="sbanner-t">GRUPPE ${GN.toUpperCase()}</div>
-          <div class="sbanner-s">${G.mis} · ${G.diff} · ${G.bits}-Bit-System</div>
-        </div>
+        <div><div class="sbanner-t">GRUPPE ${GN.toUpperCase()} — ${G.mis}</div>
+        <div class="sbanner-s">${G.diff} · ${G.bits}-Bit-System · 3 Stufen · 8 Aufgaben</div></div>
       </div>
       <div class="sbanner-body">
         <p>Ihr seid die <strong>${GN}-Crew</strong>. Raumstation NOVA-7 hat den Funkkontakt verloren — drei Sicherheitssysteme blockieren die Kommunikation.</p>
-        <p>Eure Aufgabe: alle drei Codes knacken. Dazu müsst ihr lernen, wie Computer rechnen — mit <strong>Binärzahlen</strong>!</p>
+        <p>Jede Aufgabe hat einen <strong>Prüfen-Button</strong> — bei Erfolg erscheint die Codeziffer direkt darauf!</p>
       </div>
     </div>
-
     <div class="card">
       <div class="card-lbl">EUER SYSTEM: ${G.bits}-BIT</div>
-      <p style="font-size:14px;color:var(--ink2);margin-bottom:10px">
-        Binärzahlen haben nur die Ziffern <strong>0</strong> und <strong>1</strong>. Ihr arbeitet mit dem <strong>${G.bits}-Bit-System</strong> — jede Zahl hat genau ${G.bits} Stellen. Die größte Zahl ist <strong>${G.max}</strong>.
-      </p>
-      ${bwReadonly(G.pows, exBits, 'BEISPIEL: '+ex+' = '+exC.join('+')+' = '+exBin)}
+      <p style="font-size:14px;color:var(--ink2);margin-bottom:10px">Binärzahlen haben nur 0 und 1. Euer System: <strong>${G.bits} Stellen</strong>, größte Zahl: <strong>${G.max}</strong>.</p>
+      ${bwRO(G.pows,binBits(exB),'BEISPIEL: '+G.a1[0]+' als Binär → '+exB)}
     </div>
-
     <div class="card">
-      <div class="card-lbl">EUER FAHRPLAN</div>
-      <div class="fahrplan">
-        ${fpRows.map(([n,a,d,c,col])=>`
-        <div class="fp-row" style="border-color:${col}30;background:${col}08">
-          <div class="fp-num" style="color:${col}">S${n}</div>
-          <div class="fp-desc">
-            <div class="fp-title">${a} — ${d}</div>
-            <div class="fp-code" style="color:${col}">${c}</div>
-          </div>
+      <div class="card-lbl">EUER FAHRPLAN — 3 STUFEN, 8 AUFGABEN</div>
+      ${[['S1','A1–A4','Binärzahlen kennenlernen','4 Codeziffern',G.col],
+         ['S2','A5–A6','Binär ↔ Dezimal übersetzen','2 Codeziffern','#c2410c'],
+         ['S3','A7–A8','ASCII-Code → Geheimwort','2 Codeziffern','#6d28d9'],
+        ].map(([n,a,d,c,col])=>`
+        <div style="display:flex;gap:10px;align-items:center;padding:9px 10px;
+             border-radius:6px;background:${col}08;border:1.5px solid ${col}30;margin-bottom:7px">
+          <span style="font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:${col};min-width:28px">${n}</span>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--ink)">${a} — ${d}</div>
+          <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:${col};margin-top:1px">${c}</div></div>
         </div>`).join('')}
-      </div>
-      <div class="notice" style="margin-top:12px">
-        💡 <strong>Tipp-Karten</strong> dürft ihr nutzen — jede kostet <strong>30 Sek. Zeitstrafe!</strong>
-      </div>
     </div>`);
-  setNav({back:goHome, fwd:()=>go(2), backLabel:'← Gruppe wechseln', fwdLabel:'Los geht\'s →'});
+  setNav({back:goHome,fwd:()=>go(2),backLbl:'← Gruppe wechseln',fwdLbl:"Los geht's →"});
 }
 
-// ═══════════════════════════════════════════════════ UTILS
-function bitStr(n,bits){return n.toString(2).padStart(bits,'0');}
-function binBits(b){return b.split('').map(Number);}
-function ones(b){return b.split('').filter(x=>x==='1').length;}
-function go(s){
-  sessionSave();          // save current screen state before leaving
-  step=s; updateProg();
-  SCREENS[s]?.();
-  requestAnimationFrame(()=>sessionRestore()); // restore after new DOM is built
-}
-
-const SCREENS={
-  2:renderA1Erkl, 3:renderA1Aufg,
-  4:renderA2Erkl, 5:renderA2Aufg,
-  6:renderCode1,
-  7:renderA3Erkl, 8:renderA3Aufg,
-  9:renderA4Erkl, 10:renderA4Aufg,
-  11:renderCode2,
-  12:renderA5Erkl, 13:renderA5Aufg,
-  14:renderA6Erkl, 15:renderA6Aufg,
-  16:renderCode3,
-  17:renderFinal,
-};
-
-// ═══════════════════════════════════════════════════ A1 ERKL (step 2)
-function renderA1Erkl(){
-  const ex=G.a1[0], exC=G.a1s[0];
+// ═══════════════════════════════════════════════════ STAGE 1
+// ── S1-T1: Energie-Pakete (3 exercises) ─────────────────────────────────
+function renderS1T1Erkl(){
+  const ex=G.a1[0],exC=G.a1s[0];
   let rest=ex;
-  const walkSteps=G.pows.map(pw=>{
+  const ws=G.pows.map(pw=>{
     const used=rest>=pw;
-    const line=used
-      ?`Passt <strong>${pw}</strong> in ${rest}? <strong style="color:var(--gn)">JA</strong> → nehmen, Rest: ${rest}−${pw}=${rest-pw}`
-      :`Passt <strong>${pw}</strong> in ${rest}? <strong style="color:var(--ink3)">NEIN</strong> → überspringen`;
+    const line=used?`Passt <strong>${pw}</strong> in ${rest}? <strong style="color:var(--gn)">JA</strong> → Rest: ${rest}−${pw}=${rest-pw}`
+                   :`Passt <strong>${pw}</strong> in ${rest}? <strong style="color:var(--ink3)">NEIN</strong> → überspringen`;
     if(used)rest-=pw;
     return line;
   });
-  dynHtml(`
+  dyn(`
     <div class="sbanner" style="border-color:${G.col}">
       <div class="sbanner-top" style="background:${G.col}">
         <div class="sbanner-num">1</div>
-        <div>
-          <div class="sbanner-t">STUFE 1 — REAKTORKALIBRIERUNG</div>
-          <div class="sbanner-s">Aufgabe 1 · Energiepakete kombinieren</div>
-        </div>
+        <div><div class="sbanner-t">STUFE 1 · AUFGABE 1 — ENERGIEPAKETE</div>
+        <div class="sbanner-s">Finde die richtigen Pakete für jeden Zielwert</div></div>
       </div>
-      <div class="sbanner-body">
-        <p>Die Reaktoren von NOVA-7 brauchen genau die richtigen <strong>Energiepakete</strong>. Jede Größe darf höchstens <strong>einmal</strong> benutzt werden.</p>
-      </div>
+      <div class="sbanner-body"><p>Paketgrößen: <strong>${G.pows.join(' · ')}</strong> — jedes nur einmal pro Aufgabe!</p></div>
     </div>
-
     <div class="card">
-      <div class="card-lbl">WIE GEHT DAS?</div>
-      <div class="info">
-        <p>Die Paketgrößen sind <strong>Potenzen von 2</strong>:</p>
-        <p>${G.pows.map((p,i)=>`2<sup>${G.bits-1-i}</sup> = ${p}`).join('&nbsp;&nbsp;·&nbsp;&nbsp;')}</p>
-        <p>Verfügbare Pakete: <strong>${G.pows.join(' · ')}</strong></p>
-      </div>
-      <div class="info gn" style="margin-top:10px">
-        <p><strong>Strategie:</strong> Beginne mit dem <em>größten</em> Paket, das noch nicht größer als das Ziel ist. Ziehe es ab — und wiederhole mit dem Rest.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-lbl">DURCHGERECHNETES BEISPIEL: ZIEL = ${ex}</div>
+      <div class="card-lbl">STRATEGIE + BEISPIEL (ZIEL: ${ex})</div>
+      <div class="info gn"><p>Beginne mit dem <strong>größten</strong> Paket, das noch ins Ziel passt. Ziehe es ab — wiederhole mit dem Rest.</p></div>
       <div class="ex">
         <div class="ex-lbl">◈ SCHRITT FÜR SCHRITT</div>
-        ${walkSteps.map((s,i)=>`<div class="ex-row"><span class="ex-tag">Schritt ${i+1}</span> ${s}</div>`).join('')}
-        <div class="ex-row" style="margin-top:8px;font-size:14px">
-          → Lösung: <strong>${exC.join(' + ')} = ${ex} ✓</strong>
-        </div>
+        ${ws.map((s,i)=>`<div class="ex-row"><span class="ex-tag">Schritt ${i+1}</span>${s}</div>`).join('')}
+        <div class="ex-row" style="margin-top:6px;font-size:14px">→ Lösung: <strong>${exC.join('+')}=${ex} ✓</strong></div>
       </div>
-      <p style="font-size:13px;color:var(--ink3);margin-top:10px">
-        Im Widget siehst du das als Schalter: Jedes verwendete Paket leuchtet blau (=1), jedes nicht verwendete bleibt grau (=0).
-      </p>
-      ${bwReadonly(G.pows, binBits(bitStr(ex,G.bits)), 'BEISPIEL ALS BINÄRZAHL: '+bitStr(ex,G.bits))}
     </div>`);
-  setNav({back:()=>go(1), fwd:()=>go(3)});
+  setNav({back:()=>go(1),fwd:()=>go(3)});
 }
 
-// ═══════════════════════════════════════════════════ A1 AUFG (step 3)
-function renderA1Aufg(){
-  // tasks: index 1 and 2 (index 0 = worked example)
-  const tasks=G.a1.slice(1).map((tgt,i)=>({tgt, combo:G.a1s[i+1], idx:i+1}));
-  dynHtml(`
+function renderS1T1Aufg(){
+  // 3 exercises: a1[0] (worked example shown), a1[1], a1[2]
+  const targets=G.a1; // all 3
+  dyn(`
     <div class="card">
-      <div class="card-lbl">STUFE 1 · AUFGABE 1 — REAKTORKALIBRIERUNG</div>
-      <h3>Finde die richtigen Energiepakete!</h3>
-      <p style="font-size:14px;color:var(--ink2);margin-bottom:6px">
-        Klicke auf die Schalter, um Pakete zu aktivieren. Die Summe muss das Ziel treffen.<br>
-        <span style="font-size:13px;color:var(--ink3)">Pakete: <strong>${G.pows.join(' · ')}</strong> — jedes nur einmal!</span>
-      </p>
-      <div class="notice">
-        ℹ️ Das Beispiel aus der Erklärung (Ziel ${G.a1[0]}) zählt auch mit — du brauchst alle drei Ergebnisse für den Code!
-      </div>
+      <div class="card-lbl">STUFE 1 · AUFGABE 1 — ENERGIEPAKETE</div>
+      <h3>Kombiniere die richtigen Pakete!</h3>
+      <p style="font-size:14px;color:var(--ink2);margin-bottom:8px">Pakete: <strong>${G.pows.join(' · ')}</strong></p>
+      <div class="notice">ℹ️ Ziel 1 war das Beispiel aus der Erklärung — schaue es nochmal an!</div>
     </div>
-
-    ${tasks.map(({tgt,idx})=>`
+    ${targets.map((tgt,i)=>`
     <div class="card">
-      <div class="card-lbl">AUFGABE ${idx+1} — ZIEL: ${tgt}</div>
-      ${bwHtmlT('a1-'+idx, G.pows, tgt, 'SCHALTE DIE PAKETE AN/AUS:')}
-      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="a1-${idx}-fb"></div>
-    </div>`).join('')}`);
-  setNav({back:()=>go(2), fwd:checkA1});
+      <div class="card-lbl">ZIEL ${i+1}: ${tgt}</div>
+      ${bwToggleable('s1t1-'+i,G.pows,tgt)}
+      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="s1t1-${i}-fb"></div>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s1t1-fb"></div>
+      ${checkBtnHtml('chk-s1t1','chkS1T1()')}
+    </div>`);
+  setNav({back:()=>go(2),fwd:()=>go(4)});
 }
 
-function checkA1(){
+function chkS1T1(){
   let ok=true;
-  G.a1.slice(1).forEach((tgt,i)=>{
-    const idx=i+1;
-    const sum=bwSum('a1-'+idx, G.pows);
-    const fb=document.getElementById(`a1-${idx}-fb`);
-    if(sum===tgt){
-      if(fb){fb.textContent='✓ Korrekt!';fb.style.color='var(--gn)';}
-    } else {
-      if(fb){fb.textContent=sum===0?'Schalte mindestens ein Paket an!':'Summe: '+sum+' ≠ '+tgt+'. Versuche es nochmal.';fb.style.color='var(--rd)';}
-      ok=false;
-    }
+  G.a1.forEach((tgt,i)=>{
+    const s=bwSum('s1t1-'+i,G.pows);
+    if(s===tgt){setFb('s1t1-'+i+'-fb','✓ '+tgt,true);}
+    else{setFb('s1t1-'+i+'-fb','Summe: '+s+' ≠ '+tgt,false);ok=false;}
   });
-  if(ok) go(4);
+  if(!ok){setFb('chk-s1t1-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s1t1-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s1t1',0,0);
 }
 
-// ═══════════════════════════════════════════════════ A2 ERKL (step 4)
-function renderA2Erkl(){
-  // Use A2 example target (not from A1) for the explanation
-  const ex=G.a2[0], exBin=bitStr(ex,G.bits);
-  dynHtml(`
-    <div class="sbanner" style="border-color:${G.col}">
-      <div class="sbanner-top" style="background:${G.col}">
-        <div class="sbanner-num">1</div>
-        <div>
-          <div class="sbanner-t">STUFE 1 — AUFGABE 2</div>
-          <div class="sbanner-s">Von Paketen zur Binärzahl!</div>
-        </div>
-      </div>
-      <div class="sbanner-body">
-        <p>Gut gemacht! Computer speichern die Pakete als <strong>Binärzahl</strong>: 1 = Paket AN, 0 = Paket AUS.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-lbl">ERKLÄRUNG: STELLENWERTTAFEL</div>
-      <div class="info">
-        <p>Eine <strong>${G.bits}-Bit-Binärzahl</strong> hat genau ${G.bits} Stellen — von links nach rechts, größtes Paket zuerst.</p>
-        <p><strong>1</strong> = dieses Paket wird benutzt &nbsp;|&nbsp; <strong>0</strong> = nicht benutzt</p>
-      </div>
-      <div class="ex">
-        <div class="ex-lbl">◈ BEISPIEL — ZIEL: ${ex}</div>
-        ${bwReadonly(G.pows, binBits(exBin), '')}
-        <div class="ex-row" style="margin-top:6px">
-          Aktive Stellen (1) ergeben zusammen: <strong>${ex}</strong>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-lbl">SO LIEST MAN EINE BINÄRZAHL ZURÜCK</div>
-      <div class="info or">
-        <p>Schaue, welche Stellen eine <strong>1</strong> haben. Notiere die Werte dieser Stellen. Addiere sie — fertig!</p>
-        <p>Überall wo eine <strong>0</strong> steht, wird nichts dazugezählt.</p>
-      </div>
-    </div>`);
-  setNav({back:()=>go(3), fwd:()=>go(5)});
-}
-
-// ═══════════════════════════════════════════════════ A2 AUFG (step 5)
-function renderA2Aufg(){
-  dynHtml(`
-    <div class="card">
-      <div class="card-lbl">STUFE 1 · AUFGABE 2 — BINÄRDARSTELLUNG</div>
-      <h3>Stelle neue Zielwerte als Binärzahl dar!</h3>
-      <p style="font-size:14px;color:var(--ink2);margin-bottom:8px">
-        Klicke die richtigen Schalter an — das erste Beispiel hast du gerade in der Erklärung gesehen.
-      </p>
-    </div>
-
-    ${G.a2.map((tgt,i)=>{
-      const wid='a2-'+i;
-      return `<div class="card">
-        <div class="card-lbl">ZIEL ${i+1}: ${tgt}${i===0?' (aus der Erklärung — schau sie nochmal an!)':''}</div>
-        ${bwHtmlT(wid, G.pows, tgt, 'SCHALTE DIE PASSENDEN PAKETE AN:')}
-        <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="a2-${i}-fb"></div>
-      </div>`;
-    }).join('')}`);
-  setNav({back:()=>go(4), fwd:checkA2, fwdLabel:'Weiter zum Code →'});
-}
-
-function checkA2(){
-  let ok=true;
-  G.a2.forEach((tgt,i)=>{
-    const sum=bwSum('a2-'+i, G.pows);
-    const fb=document.getElementById(`a2-${i}-fb`);
-    if(sum===tgt){
-      if(fb){fb.textContent='✓ '+tgt+' korrekt!';fb.style.color='var(--gn)';}
-    } else {
-      if(fb){fb.textContent='Summe: '+sum+' ≠ '+tgt;fb.style.color='var(--rd)';}
-      ok=false;
-    }
-  });
-  if(ok) go(6);
-}
-
-// ═══════════════════════════════════════════════════ CODE 1 (step 6)
-function renderCode1(){
-  const s=G.a1.reduce((a,b)=>a+b,0);
-  dynHtml(`
-    <div class="card">
-      <div class="card-lbl">STUFE 1 — CODE EINGEBEN</div>
-      <h3 style="color:${G.col}">🔐 Freischalt-Code Stufe 1 (4 Ziffern)</h3>
-      <p style="font-size:14px;color:var(--ink2)">
-        Ermittle den 4-stelligen Code aus deinen Ergebnissen.
-      </p>
-    </div>
-
-    <div class="hint-box">
-      <h4>◈ WIE DU DEN CODE ERMITTELST</h4>
-      <div class="hint-step">
-        <div class="hint-num">1</div>
-        <div>
-          <strong>Codeziffer 1 + 2:</strong>
-          Addiere die drei Zielwerte aus <strong>Aufgabe 1</strong>
-          (${G.a1[0]}, ${G.a1[1]} und ${G.a1[2]}) zusammen.
-          Nimm die <strong>letzten zwei Ziffern</strong> dieser Summe —
-          das ist Codeziffer 1 (Zehnerstelle) und Codeziffer 2 (Einerstelle).
-        </div>
-      </div>
-      <div class="hint-step">
-        <div class="hint-num">2</div>
-        <div>
-          <strong>Codeziffer 3:</strong>
-          Schau dir den <strong>mittleren Zielwert aus Aufgabe 2 (${G.a2[1]})</strong> an —
-          du hast ihn bereits als Binärzahl dargestellt.
-          Zähle alle <strong>Einsen</strong> in dieser Binärzahl.
-          Das ist Codeziffer 3.
-        </div>
-      </div>
-      <div class="hint-step">
-        <div class="hint-num">3</div>
-        <div>
-          <strong>Codeziffer 4:</strong>
-          Schau dir den <strong>dritten Zielwert aus Aufgabe 2 (${G.a2[2]})</strong> an.
-          Die <strong>Einerstelle</strong> (letzte Ziffer) dieser Zahl ist Codeziffer 4.
-        </div>
-      </div>
-    </div>
-
-    <div class="code-wrap" style="border-color:${G.col}">
-      <h2 style="color:${G.col}">4-stelligen Code eingeben</h2>
-      <div class="code-digits" id="cd1-digs">
-        ${[0,1,2,3].map(i=>`<input class="cd" type="text" inputmode="numeric" maxlength="1"
-          id="cd1-${i}" placeholder="?" autocomplete="off"
-          oninput="cdInput(this,'cd1',${i},4)"
-          onkeydown="cdKey(event,'cd1',${i},4)">`).join('')}
-      </div>
-      <div class="code-fb" id="cd1-fb"></div>
-      <button class="btn btn-p" style="background:${G.col};margin-top:14px" onclick="submitCode('cd1',4,G.L1,7)">
-        Code prüfen →
-      </button>
-    </div>`);
-  setNav({back:()=>go(5), fwd:null});
-  setTimeout(()=>document.getElementById('cd1-0')?.focus(),100);
-}
-
-// ═══════════════════════════════════════════════════ A3 ERKL (step 7)
-function renderA3Erkl(){
-  const ex_b=G.a3b[0], ex_d=G.a3d[0];
-  const active=G.pows.filter((_,i)=>ex_b[i]==='1');
-  dynHtml(`
-    <div class="sbanner" style="border-color:#c2410c">
-      <div class="sbanner-top" style="background:#c2410c">
-        <div class="sbanner-num">2</div>
-        <div>
-          <div class="sbanner-t">STUFE 2 — SIGNALÜBERTRAGUNG</div>
-          <div class="sbanner-s">Aufgabe 3 · Binär → Dezimal</div>
-        </div>
-      </div>
-      <div class="sbanner-body">
-        <p>NOVA-7 sendet <strong>Binärsignale</strong> zur Erde. Du musst sie in normale Dezimalzahlen übersetzen!</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-lbl">SO LIEST MAN EIN BINÄRSIGNAL</div>
-      <div class="info">
-        <p>Überall wo eine <strong>1</strong> steht: nimm den Wert dieser Stelle.</p>
-        <p>Überall wo eine <strong>0</strong> steht: nichts addieren.</p>
-        <p>Am Ende alles zusammenzählen.</p>
-      </div>
-      <div class="ex">
-        <div class="ex-lbl">◈ BEISPIEL: ${ex_b}</div>
-        ${bwReadonly(G.pows, binBits(ex_b), '')}
-        <div class="ex-row">Aktive Stellen: <strong>${active.join(' + ')} = ${ex_d}</strong> ✓</div>
-      </div>
-    </div>`);
-  setNav({back:()=>go(6), fwd:()=>go(8)});
-}
-
-// ═══════════════════════════════════════════════════ A3 AUFG (step 8)
-function renderA3Aufg(){
-  dynHtml(`
-    <div class="card">
-      <div class="card-lbl">STUFE 2 · AUFGABE 3 — SIGNALE ENTSCHLÜSSELN</div>
-      <h3>Welche Dezimalzahl steckt hinter dem Binärsignal?</h3>
-      <p style="font-size:14px;color:var(--ink2);margin-bottom:10px">
-        Lies das Signal Stelle für Stelle. Überall wo eine <strong>1</strong> steht,
-        nimmst du den Stellenwert und addierst ihn.
-      </p>
-    </div>
-
-    ${G.a3b.map((b,i)=>{
-      const cells = G.pows.map((pw,pi)=>`
-        <div class="bw-cell">
-          <div class="bw-pow">${pw}</div>
-          <div class="bw-bit ro${b[pi]==='1'?' on':''}">${b[pi]}</div>
-        </div>`).join('');
-      return `<div class="card">
-        <div class="card-lbl">SIGNAL ${i+1}</div>
-        <div class="bw-wrap">
-          <div class="bw-lbl">EMPFANGENES SIGNAL:</div>
-          <div class="bw">${cells}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
-          <span style="font-size:14px;color:var(--ink2)">Ergebnis (Dezimal):</span>
-          <input type="text" inputmode="numeric" maxlength="4" id="a3-${i}"
-            placeholder="?" autocomplete="off"
-            style="width:90px;height:48px;border:2px solid var(--brd);
-            border-radius:var(--rs);padding:0 14px;
-            font-family:'Orbitron',monospace;font-size:20px;font-weight:700;
-            background:var(--panel2);color:var(--ink);transition:border-color .15s"
-            oninput="this.style.borderColor='var(--brd)'">
-        </div>
-        <div style="font-size:12px;color:var(--ink4);margin-top:5px" id="a3-${i}-fb"></div>
-      </div>`;
-    }).join('')}`);
-  setNav({back:()=>go(7), fwd:checkA3});
-}
-
-function checkA3(){
-  let ok=true;
-  G.a3b.forEach((_,i)=>{
-    const el=document.getElementById('a3-'+i);
-    const fb=document.getElementById('a3-'+i+'-fb');
-    const val=parseInt(el.value);
-    if(val===G.a3d[i]){
-      el.style.borderColor='var(--gn)';el.style.background='var(--gn-bg)';
-      if(fb){fb.textContent='✓ '+G.a3d[i]+' — korrekt!';fb.style.color='var(--gn)';}
-    } else {
-      el.style.borderColor='var(--rd)';
-      if(fb){fb.textContent=!el.value?'Bitte eine Zahl eingeben.':'Nicht korrekt — addiere alle Stellen mit einer 1.';fb.style.color='var(--rd)';}
-      ok=false;
-    }
-  });
-  if(ok) go(9);
-}
-
-// ═══════════════════════════════════════════════════ A4 ERKL (step 9)
-function renderA4Erkl(){
-  const ex_d=G.a4d[0], ex_b=G.a4b[0];
-  let rest=ex_d;
+// ── S1-T2: Dezimal → Binär (3 exercises) ─────────────────────────────────
+function renderS1T2Erkl(){
+  const ex=G.a2[0],exB=bitStr(ex,G.bits);
+  let rest=ex;
   const ws=G.pows.map(pw=>{
     const used=rest>=pw;
     const s=used?`JA → 1, Rest: ${rest}−${pw}=${rest-pw}`:`NEIN → 0`;
     if(used)rest-=pw;
-    return {pw,used,s};
+    return{pw,used,s};
   });
-  dynHtml(`
-    <div class="sbanner" style="border-color:#c2410c">
-      <div class="sbanner-top" style="background:#c2410c">
-        <div class="sbanner-num">2</div>
-        <div>
-          <div class="sbanner-t">STUFE 2 — AUFGABE 4</div>
-          <div class="sbanner-s">Dezimal → Binär · jetzt andersherum!</div>
-        </div>
+  dyn(`
+    <div class="sbanner" style="border-color:${G.col}">
+      <div class="sbanner-top" style="background:${G.col}">
+        <div class="sbanner-num">1</div>
+        <div><div class="sbanner-t">STUFE 1 · AUFGABE 2 — DEZIMAL → BINÄR</div>
+        <div class="sbanner-s">Zahlen als Binärzahl aufschreiben</div></div>
       </div>
-      <div class="sbanner-body">
-        <p>Jetzt müsst ihr eine Dezimalzahl in Binär umwandeln — so funken wir NOVA-7 an!</p>
-      </div>
+      <div class="sbanner-body"><p>Gehe Stellenwert für Stellenwert: passt er rein? → 1 und abziehen. Nicht? → 0.</p></div>
     </div>
-
     <div class="card">
-      <div class="card-lbl">METHODE: STUFE FÜR STUFE</div>
-      <div class="info or">
-        <p>Gehe von <strong>links nach rechts</strong> durch die Stellenwerte.</p>
-        <p>Frage bei jedem Wert: <strong>"Passt er noch in meine Restzahl?"</strong></p>
-        <p>Ja → schreibe 1, ziehe ab. &nbsp; Nein → schreibe 0, weiter.</p>
-      </div>
+      <div class="card-lbl">BEISPIEL: ${ex} → ${exB}</div>
       <div class="ex">
-        <div class="ex-lbl">◈ BEISPIEL: ${ex_d} → ${ex_b}</div>
         ${ws.map(({pw,used,s})=>`<div class="ex-row">
-          <span class="ex-tag" style="background:${used?'var(--gn)':'var(--ink3)'}">${pw}</span>
-          ${s}
+          <span class="ex-tag" style="background:${used?'var(--gn)':'var(--ink3)'}">${pw}</span>${s}
         </div>`).join('')}
-        ${bwReadonly(G.pows, binBits(ex_b), 'ERGEBNIS:')}
       </div>
+      ${bwRO(G.pows,binBits(exB),'ERGEBNIS: '+exB)}
     </div>`);
-  setNav({back:()=>go(8), fwd:()=>go(10)});
+  setNav({back:()=>go(3),fwd:()=>go(5)});
 }
 
-// ═══════════════════════════════════════════════════ A4 AUFG (step 10)
-function renderA4Aufg(){
-  dynHtml(`
+function renderS1T2Aufg(){
+  const targets=G.a2; // 3 items
+  dyn(`
     <div class="card">
-      <div class="card-lbl">STUFE 2 · AUFGABE 4 — GEGENSIGNAL SENDEN</div>
-      <h3>Wandle die Dezimalzahlen in Binär um!</h3>
-      <p style="font-size:14px;color:var(--ink2)">
-        Klicke die Stellen an, bis die Summe stimmt.
-      </p>
+      <div class="card-lbl">STUFE 1 · AUFGABE 2 — DEZIMAL → BINÄR</div>
+      <h3>Stelle die Zahlen als Binärzahl dar!</h3>
     </div>
+    ${targets.map((tgt,i)=>`
+    <div class="card">
+      <div class="card-lbl">ZIEL ${i+1}: ${tgt}</div>
+      ${bwToggleable('s1t2-'+i,G.pows,tgt)}
+      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="s1t2-${i}-fb"></div>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s1t2-fb"></div>
+      ${checkBtnHtml('chk-s1t2','chkS1T2()')}
+    </div>`);
+  setNav({back:()=>go(4),fwd:()=>go(6)});
+}
+function chkS1T2(){
+  let ok=true;
+  G.a2.forEach((tgt,i)=>{
+    const s=bwSum('s1t2-'+i,G.pows);
+    if(s===tgt){setFb('s1t2-'+i+'-fb','✓ '+bitStr(tgt,G.bits),true);}
+    else{setFb('s1t2-'+i+'-fb','Summe: '+s+' ≠ '+tgt,false);ok=false;}
+  });
+  if(!ok){setFb('chk-s1t2-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s1t2-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s1t2',0,1);
+}
 
+// ── S1-T3: Binär → Dezimal (3 signals) ───────────────────────────────────
+function renderS1T3Erkl(){
+  const b=G.a3b[0],d=G.a3d[0];
+  const act=G.pows.filter((_,i)=>b[i]==='1');
+  dyn(`
+    <div class="sbanner" style="border-color:${G.col}">
+      <div class="sbanner-top" style="background:${G.col}">
+        <div class="sbanner-num">1</div>
+        <div><div class="sbanner-t">STUFE 1 · AUFGABE 3 — SIGNAL LESEN</div>
+        <div class="sbanner-s">Binärsignal → Dezimalzahl</div></div>
+      </div>
+      <div class="sbanner-body"><p>Überall wo eine <strong>1</strong> steht: Stellenwert addieren. Nullen = nichts.</p></div>
+    </div>
+    <div class="card">
+      <div class="card-lbl">BEISPIEL: ${b}</div>
+      ${bwRO(G.pows,binBits(b),'')}
+      <div class="ex" style="margin-top:10px">
+        <div class="ex-lbl">◈ RECHNUNG</div>
+        <div class="ex-row">Aktive Stellen: <strong>${act.join(' + ')}</strong></div>
+        <div class="ex-row">Ergebnis: <strong>${d}</strong> ✓</div>
+      </div>
+    </div>`);
+  setNav({back:()=>go(5),fwd:()=>go(7)});
+}
+
+function renderS1T3Aufg(){
+  dyn(`
+    <div class="card">
+      <div class="card-lbl">STUFE 1 · AUFGABE 3 — SIGNAL LESEN</div>
+      <h3>Welche Dezimalzahl zeigt jedes Signal?</h3>
+    </div>
+    ${G.a3b.map((b,i)=>`
+    <div class="card">
+      <div class="card-lbl">SIGNAL ${i+1}</div>
+      <div class="bw-wrap"><div class="bw-lbl">EMPFANGENES SIGNAL:</div><div class="bw">${sigRow(b,G.pows)}</div></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap">
+        <span style="font-size:14px;color:var(--ink2)">Dezimal:</span>
+        ${numInput('s1t3-'+i)}
+      </div>
+      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="s1t3-${i}-fb"></div>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s1t3-fb"></div>
+      ${checkBtnHtml('chk-s1t3','chkS1T3()')}
+    </div>`);
+  setNav({back:()=>go(6),fwd:()=>go(8)});
+}
+function chkS1T3(){
+  let ok=true;
+  G.a3b.forEach((_,i)=>{
+    const val=parseInt(document.getElementById('s1t3-'+i)?.value);
+    if(val===G.a3d[i]){setOk('s1t3-'+i);setFb('s1t3-'+i+'-fb','✓ '+G.a3d[i],true);}
+    else{setErr('s1t3-'+i);setFb('s1t3-'+i+'-fb',isNaN(val)?'Bitte eingeben.':'Nicht korrekt.',false);ok=false;}
+  });
+  if(!ok){setFb('chk-s1t3-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s1t3-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s1t3',0,2);
+}
+
+// ── S1-T4: Dezimal → Binär neue Werte (3 exercises) ──────────────────────
+function renderS1T4Erkl(){
+  const dec=G.a4d[0],bin=G.a4b[0];
+  let rest=dec;
+  const ws=G.pows.map(pw=>{
+    const used=rest>=pw;
+    const s=used?`JA → 1, Rest: ${rest}−${pw}=${rest-pw}`:`NEIN → 0`;
+    if(used)rest-=pw;
+    return{pw,used,s};
+  });
+  dyn(`
+    <div class="sbanner" style="border-color:${G.col}">
+      <div class="sbanner-top" style="background:${G.col}">
+        <div class="sbanner-num">1</div>
+        <div><div class="sbanner-t">STUFE 1 · AUFGABE 4 — UMWANDLUNG</div>
+        <div class="sbanner-s">Mehr Dezimalzahlen → Binär umwandeln</div></div>
+      </div>
+      <div class="sbanner-body"><p>Selbe Methode wie Aufgabe 2 — jetzt mit neuen Zahlen!</p></div>
+    </div>
+    <div class="card">
+      <div class="card-lbl">ERINNERUNG: ${dec} → ${bin}</div>
+      <div class="ex">
+        ${ws.map(({pw,used,s})=>`<div class="ex-row">
+          <span class="ex-tag" style="background:${used?'var(--gc)':'var(--ink3)'}">${pw}</span>${s}
+        </div>`).join('')}
+      </div>
+    </div>`);
+  setNav({back:()=>go(7),fwd:()=>go(9)});
+}
+
+function renderS1T4Aufg(){
+  dyn(`
+    <div class="card">
+      <div class="card-lbl">STUFE 1 · AUFGABE 4 — DEZIMAL → BINÄR</div>
+      <h3>Wandle die Zahlen in Binär um!</h3>
+    </div>
     ${G.a4d.map((dec,i)=>`
     <div class="card">
       <div class="card-lbl">ZAHL ${i+1}: ${dec}</div>
-      ${bwHtmlT('a4-'+i, G.pows, dec, 'AKTIVIERE DIE RICHTIGEN STELLEN:')}
-      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="a4-${i}-fb"></div>
-    </div>`).join('')}`);
-  setNav({back:()=>go(9), fwd:checkA4, fwdLabel:'Weiter zum Code →'});
+      ${bwToggleable('s1t4-'+i,G.pows,dec)}
+      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="s1t4-${i}-fb"></div>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s1t4-fb"></div>
+      ${checkBtnHtml('chk-s1t4','chkS1T4()')}
+    </div>`);
+  setNav({back:()=>go(8),fwd:()=>go(10)});
 }
-
-function checkA4(){
+function chkS1T4(){
   let ok=true;
   G.a4d.forEach((dec,i)=>{
-    const sum=bwSum('a4-'+i, G.pows);
-    const fb=document.getElementById('a4-'+i+'-fb');
-    if(sum===dec){
-      if(fb){fb.textContent='✓ Korrekt!';fb.style.color='var(--gn)';}
-    } else {
-      if(fb){fb.textContent='Summe: '+sum+' ≠ '+dec;fb.style.color='var(--rd)';}
-      ok=false;
-    }
+    const s=bwSum('s1t4-'+i,G.pows);
+    if(s===dec){setFb('s1t4-'+i+'-fb','✓ '+G.a4b[i],true);}
+    else{setFb('s1t4-'+i+'-fb','Summe: '+s+' ≠ '+dec,false);ok=false;}
   });
-  if(ok) go(11);
+  if(!ok){setFb('chk-s1t4-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s1t4-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s1t4',0,3);
 }
 
-// ═══════════════════════════════════════════════════ CODE 2 (step 11)
+// ── Code 1 ───────────────────────────────────────────────────────────────
+function renderCode1(){
+  dyn(`
+    <div class="card">
+      <div class="card-lbl">STUFE 1 — CODE EINGEBEN</div>
+      <h3 style="color:${G.col}">🔐 Freischalt-Code Stufe 1</h3>
+      <p style="font-size:14px;color:var(--ink2);margin-bottom:14px">Tragt die vier Codeziffern ein, die ihr freigeschaltet habt.</p>
+    </div>
+    ${codeDisplay(0)}
+    <div class="code-wrap" style="border-color:${G.col}">
+      <h2 style="color:${G.col}">4-stelligen Code eingeben</h2>
+      <div class="code-digits">
+        ${[0,1,2,3].map(i=>`<input class="cd" type="text" inputmode="numeric" maxlength="1"
+          id="c1-${i}" placeholder="?" autocomplete="off"
+          oninput="cdIn(this,'c1',${i},4)" onkeydown="cdKey(event,'c1',${i},4)">`).join('')}
+      </div>
+      <div class="code-fb" id="c1-fb"></div>
+      <button class="btn btn-p" style="background:${G.col};margin-top:14px"
+        onclick="subCode('c1',4,stageCode(0),11)">Code prüfen →</button>
+    </div>`);
+  setNav({back:()=>go(9)});
+  setTimeout(()=>document.getElementById('c1-0')?.focus(),100);
+}
+
+// ═══════════════════════════════════════════════════ STAGE 2
+// ── S2-T1: Binär → Dezimal (3 signals) ───────────────────────────────────
+function renderS2T1Erkl(){
+  dyn(`
+    <div class="sbanner" style="border-color:#c2410c">
+      <div class="sbanner-top" style="background:#c2410c">
+        <div class="sbanner-num">2</div>
+        <div><div class="sbanner-t">STUFE 2 · AUFGABE 5 — SIGNALÜBERTRAGUNG</div>
+        <div class="sbanner-s">Binärsignale lesen — jetzt ohne Schritt-für-Schritt</div></div>
+      </div>
+      <div class="sbanner-body"><p>Du weißt jetzt wie es geht. Übersetze die Signale direkt in Dezimalzahlen!</p></div>
+    </div>
+    <div class="card">
+      <div class="card-lbl">ERINNERUNG</div>
+      <div class="info or"><p>Überall wo eine <strong>1</strong> steht: Stellenwert addieren. Alle <strong>0</strong>-Stellen: nichts addieren.</p></div>
+    </div>`);
+  setNav({back:()=>go(10),fwd:()=>go(12)});
+}
+function renderS2T1Aufg(){
+  dyn(`
+    <div class="card">
+      <div class="card-lbl">STUFE 2 · AUFGABE 5 — SIGNALE ENTSCHLÜSSELN</div>
+      <h3>Welche Dezimalzahl steckt in jedem Signal?</h3>
+    </div>
+    ${G.a3b.map((b,i)=>`
+    <div class="card">
+      <div class="card-lbl">SIGNAL ${i+1}</div>
+      <div class="bw-wrap"><div class="bw-lbl">EMPFANGENES SIGNAL:</div><div class="bw">${sigRow(b,G.pows)}</div></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap">
+        <span style="font-size:14px;color:var(--ink2)">Dezimal:</span>
+        ${numInput('s2t1-'+i)}
+      </div>
+      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="s2t1-${i}-fb"></div>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s2t1-fb"></div>
+      ${checkBtnHtml('chk-s2t1','chkS2T1()')}
+    </div>`);
+  setNav({back:()=>go(11),fwd:()=>go(13)});
+}
+function chkS2T1(){
+  let ok=true;
+  G.a3b.forEach((_,i)=>{
+    const val=parseInt(document.getElementById('s2t1-'+i)?.value);
+    if(val===G.a3d[i]){setOk('s2t1-'+i);setFb('s2t1-'+i+'-fb','✓ '+G.a3d[i],true);}
+    else{setErr('s2t1-'+i);setFb('s2t1-'+i+'-fb',isNaN(val)?'Bitte eingeben.':'Nicht korrekt.',false);ok=false;}
+  });
+  if(!ok){setFb('chk-s2t1-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s2t1-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s2t1',1,0);
+}
+
+// ── S2-T2: Dezimal → Binär (3 numbers) ───────────────────────────────────
+function renderS2T2Erkl(){
+  dyn(`
+    <div class="sbanner" style="border-color:#c2410c">
+      <div class="sbanner-top" style="background:#c2410c">
+        <div class="sbanner-num">2</div>
+        <div><div class="sbanner-t">STUFE 2 · AUFGABE 6 — GEGENSIGNAL SENDEN</div>
+        <div class="sbanner-s">Dezimalzahl → Binärzahl</div></div>
+      </div>
+      <div class="sbanner-body"><p>Jetzt sendest du zurück! Wandle Dezimalzahlen in Binär um.</p></div>
+    </div>
+    <div class="card">
+      <div class="card-lbl">ERINNERUNG</div>
+      <div class="info or"><p>Stellenwerte von links: Passt er rein? → 1 und abziehen. Nicht? → 0, weiter.</p></div>
+    </div>`);
+  setNav({back:()=>go(12),fwd:()=>go(14)});
+}
+function renderS2T2Aufg(){
+  dyn(`
+    <div class="card">
+      <div class="card-lbl">STUFE 2 · AUFGABE 6 — DEZIMAL → BINÄR</div>
+      <h3>Wandle die Zahlen in Binär um!</h3>
+    </div>
+    ${G.a4d.map((dec,i)=>`
+    <div class="card">
+      <div class="card-lbl">ZAHL ${i+1}: ${dec}</div>
+      ${bwToggleable('s2t2-'+i,G.pows,dec)}
+      <div style="font-size:12px;color:var(--ink4);margin-top:4px" id="s2t2-${i}-fb"></div>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s2t2-fb"></div>
+      ${checkBtnHtml('chk-s2t2','chkS2T2()')}
+    </div>`);
+  setNav({back:()=>go(13),fwd:()=>go(15)});
+}
+function chkS2T2(){
+  let ok=true;
+  G.a4d.forEach((dec,i)=>{
+    const s=bwSum('s2t2-'+i,G.pows);
+    if(s===dec){setFb('s2t2-'+i+'-fb','✓ '+G.a4b[i],true);}
+    else{setFb('s2t2-'+i+'-fb','Summe: '+s+' ≠ '+dec,false);ok=false;}
+  });
+  if(!ok){setFb('chk-s2t2-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s2t2-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s2t2',1,1);
+}
+
+// ── Code 2 ───────────────────────────────────────────────────────────────
 function renderCode2(){
-  dynHtml(`
+  dyn(`
     <div class="card">
       <div class="card-lbl">STUFE 2 — CODE EINGEBEN</div>
-      <h3 style="color:#c2410c">🔐 Freischalt-Code Stufe 2 (2 Codeziffern)</h3>
-      <p style="font-size:14px;color:var(--ink2)">
-        Ermittle die zwei Codeziffern aus deinen Ergebnissen.
-      </p>
+      <h3 style="color:#c2410c">🔐 Freischalt-Code Stufe 2</h3>
     </div>
-
-    <div class="hint-box">
-      <h4>◈ WIE DU DEN CODE ERMITTELST</h4>
-      <div class="hint-step">
-        <div class="hint-num">1</div>
-        <div>
-          <strong>Beide Codeziffern zusammen:</strong>
-          Addiere die beiden Dezimalzahlen, die du in <strong>Aufgabe 3</strong> als Ergebnisse notiert hast.
-          Die <strong>letzten zwei Ziffern</strong> dieser Summe sind Codeziffer 1 und Codeziffer 2.
-        </div>
-      </div>
-    </div>
-
+    ${codeDisplay(1)}
     <div class="code-wrap" style="border-color:#c2410c">
       <h2 style="color:#c2410c">2-stelligen Code eingeben</h2>
       <div class="code-digits">
         ${[0,1].map(i=>`<input class="cd" type="text" inputmode="numeric" maxlength="1"
-          id="cd2-${i}" placeholder="?" autocomplete="off"
-          oninput="cdInput(this,'cd2',${i},2)"
-          onkeydown="cdKey(event,'cd2',${i},2)">`).join('')}
+          id="c2-${i}" placeholder="?" autocomplete="off"
+          oninput="cdIn(this,'c2',${i},2)" onkeydown="cdKey(event,'c2',${i},2)">`).join('')}
       </div>
-      <div class="code-fb" id="cd2-fb"></div>
+      <div class="code-fb" id="c2-fb"></div>
       <button class="btn btn-p" style="background:#c2410c;margin-top:14px"
-        onclick="submitCode('cd2',2,G.L2,12)">Code prüfen →</button>
+        onclick="subCode('c2',2,stageCode(1),16)">Code prüfen →</button>
     </div>`);
-  setNav({back:()=>go(10), fwd:null});
-  setTimeout(()=>document.getElementById('cd2-0')?.focus(),100);
+  setNav({back:()=>go(14)});
+  setTimeout(()=>document.getElementById('c2-0')?.focus(),100);
 }
 
-// ═══════════════════════════════════════════════════ A5 ERKL (step 12)
-function renderA5Erkl(){
+// ═══════════════════════════════════════════════════ STAGE 3
+function asciiTable(){
   const chars=[32,33,...Array.from({length:26},(_,i)=>i+65)];
-  // Build 4-column ASCII table
-  const cols=4;
-  const rows=[];
-  for(let i=0;i<chars.length;i+=cols){
-    rows.push(chars.slice(i,i+cols));
-  }
-  dynHtml(`
+  const rows=[]; const cols=4;
+  for(let i=0;i<chars.length;i+=cols)rows.push(chars.slice(i,i+cols));
+  return `<div class="ascii-scroll"><table class="ascii-t">
+    <tr>${Array.from({length:cols}).map(()=>'<th>Zeich.</th><th>Dez</th><th>8-Bit</th>').join('<th style="width:8px"></th>')}</tr>
+    ${rows.map(row=>`<tr${row.includes(33)?` class="excl"`:''}>${
+      row.map((c,ci)=>{const ch=c===32?'SP':String.fromCharCode(c);
+        return `<td class="ch">${ch}</td><td>${c}</td><td style="font-size:11px">${c.toString(2).padStart(8,'0')}</td>`+(ci<row.length-1?'<td></td>':'');
+      }).join('')
+    }</tr>`).join('')}
+  </table></div>`;
+}
+
+// ── S3-T1: ASCII read (3 chars) ───────────────────────────────────────────
+function renderS3T1Erkl(){
+  dyn(`
     <div class="sbanner" style="border-color:#6d28d9">
       <div class="sbanner-top" style="background:#6d28d9">
         <div class="sbanner-num">3</div>
-        <div>
-          <div class="sbanner-t">STUFE 3 — ASCII-GEHEIMBOTSCHAFT</div>
-          <div class="sbanner-s">Buchstaben als Binärzahlen · ASCII-Code</div>
-        </div>
+        <div><div class="sbanner-t">STUFE 3 · AUFGABEN 7–8 — ASCII</div>
+        <div class="sbanner-s">Buchstaben als 8-Bit-Binärzahlen</div></div>
       </div>
       <div class="sbanner-body">
-        <p>Computer speichern nicht nur Zahlen — auch <strong>Buchstaben</strong> werden als Binärzahlen gespeichert! Dafür nutzen sie den <strong>ASCII-Code</strong>.</p>
+        <p><strong>ASCII</strong>: Jedes Zeichen hat eine feste Dezimalzahl → als 8-Bit-Binärzahl gespeichert.</p>
+        <p><strong>A</strong> = 65 → <span class="mono">01000001</span> &nbsp;|&nbsp; <strong>!</strong> = 33 → <span class="mono">00100001</span></p>
       </div>
     </div>
-
-    <div class="card">
-      <div class="card-lbl">WAS IST ASCII?</div>
-      <div class="info pu">
-        <p><strong>ASCII</strong> = American Standard Code for Information Interchange (1963)</p>
-        <p>Jedes Zeichen bekommt eine feste Nummer (0–127), die als <strong>8-Bit-Binärzahl</strong> gespeichert wird.</p>
-        <p>Mit 8 Bit: 2⁸ = <strong>256 mögliche Zeichen</strong> — Buchstaben, Ziffern, Sonderzeichen.</p>
-      </div>
-      <div class="ex">
-        <div class="ex-lbl">◈ BEISPIELE</div>
-        <div class="ex-row"><strong>A</strong> = 65 → <span class="mono">1000001</span></div>
-        <div class="ex-row"><strong>Z</strong> = 90 → <span class="mono">1011010</span></div>
-        <div class="ex-row" style="color:var(--or)"><strong>!</strong> = 33 → <span class="mono">0100001</span> ← Sonderzeichen!</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-lbl">ASCII-TABELLE (AUSSCHNITT)</div>
-      <div class="ascii-scroll">
-        <table class="ascii-t">
-          <tr>
-            ${Array.from({length:cols}).map(()=>'<th>Zeich.</th><th>Dez</th><th>8-Bit</th>').join('<th style="width:12px"></th>')}
-          </tr>
-          ${rows.map(row=>`<tr${row.includes(33)?` class="excl"`:''}>${
-            row.map((c,ci)=>{
-              const ch=c===32?'SP':String.fromCharCode(c);
-              return `<td class="ch">${ch}</td><td>${c}</td><td style="font-size:11px">${c.toString(2).padStart(8,'0')}</td>`+(ci<row.length-1?'<td></td>':'');
-            }).join('')
-          }</tr>`).join('')}
-        </table>
-      </div>
-    </div>`);
-  setNav({back:()=>go(11), fwd:()=>go(13)});
+    <div class="card"><div class="card-lbl">ASCII-TABELLE</div>${asciiTable()}</div>`);
+  setNav({back:()=>go(15),fwd:()=>go(17)});
 }
 
-// ═══════════════════════════════════════════════════ A5 AUFG (step 13)
-function renderA5Aufg(){
+function renderS3T1Aufg(){
   const ASCII8=[128,64,32,16,8,4,2,1];
   const preview=Array.from(G.sec.slice(0,3));
-  dynHtml(`
+  dyn(`
     <div class="card">
-      <div class="card-lbl">STUFE 3 · AUFGABE 5 — ASCII LESEN</div>
-      <h3>Welches Zeichen steckt hinter dem Code?</h3>
-      <p style="font-size:14px;color:var(--ink2)">
-        Lies den 8-Bit-Code ab und suche die Dezimalzahl in der ASCII-Tabelle.
-      </p>
+      <div class="card-lbl">STUFE 3 · AUFGABE 7 — ASCII LESEN</div>
+      <h3>Welches Zeichen steckt hinter jedem 8-Bit-Signal?</h3>
     </div>
-
     ${preview.map((ch,i)=>{
-      const code=ch.charCodeAt(0);
-      const bin=code.toString(2).padStart(8,'0');
-      const cells=ASCII8.map((pw,pi)=>`
-        <div class="bw-cell">
-          <div class="bw-pow">${pw}</div>
-          <div class="bw-bit ro${bin[pi]==='1'?' on':''}">${bin[pi]}</div>
-        </div>`).join('');
+      const bin=ch.charCodeAt(0).toString(2).padStart(8,'0');
       return `<div class="card">
         <div class="card-lbl">SIGNAL ${i+1}</div>
-        <div class="bw-wrap">
-          <div class="bw-lbl">EMPFANGENES SIGNAL:</div>
-          <div class="bw">${cells}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
+        <div class="bw-wrap"><div class="bw-lbl">EMPFANGENES SIGNAL:</div><div class="bw">${sigRow(bin,ASCII8)}</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
           <span style="font-size:14px;color:var(--ink2)">Zeichen:</span>
-          <input type="text" maxlength="1" id="a5-${i}"
-            placeholder="?" autocomplete="off"
-            style="width:52px;height:50px;text-align:center;
-            font-family:'Orbitron',monospace;font-size:22px;font-weight:900;
-            border:2.5px solid var(--brd);border-radius:var(--rs);
-            background:var(--panel2);color:var(--ink)">
+          ${charInput('s3t1-'+i)}
         </div>
-        <div style="font-size:12px;color:var(--ink4);margin-top:6px" id="a5-${i}-fb"></div>
+        <div style="font-size:12px;color:var(--ink4);margin-top:5px" id="s3t1-${i}-fb"></div>
       </div>`;
-    }).join('')}`);
-  setNav({back:()=>go(12), fwd:checkA5});
+    }).join('')}
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s3t1-fb"></div>
+      ${checkBtnHtml('chk-s3t1','chkS3T1()')}
+    </div>`);
+  setNav({back:()=>go(16),fwd:()=>go(18)});
 }
-
-function checkA5(){
+function chkS3T1(){
   let ok=true;
   Array.from(G.sec.slice(0,3)).forEach((ch,i)=>{
-    const el=document.getElementById('a5-'+i);
-    const fb=document.getElementById('a5-'+i+'-fb');
+    const el=document.getElementById('s3t1-'+i);
     if(el.value===ch){
       el.style.borderColor='var(--gn)';el.style.background='var(--gn-bg)';el.style.color='var(--gn)';
-      if(fb){fb.textContent='✓ Richtig!';fb.style.color='var(--gn)';}
+      setFb('s3t1-'+i+'-fb','✓ "'+ch+'"',true);
     } else {
       el.style.borderColor='var(--rd)';
-      if(fb){fb.textContent='Nicht ganz — schau nochmal in der Tabelle.';fb.style.color='var(--rd)';}
-      ok=false;
+      setFb('s3t1-'+i+'-fb','Schau in der Tabelle nach.',false);ok=false;
     }
   });
-  if(ok) go(14);
+  if(!ok){setFb('chk-s3t1-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s3t1-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s3t1',2,0);
 }
 
-// ═══════════════════════════════════════════════════ A6 ERKL (step 14)
-function renderA6Erkl(){
-  dynHtml(`
+// ── S3-T2: Full secret word decode ───────────────────────────────────────
+function renderS3T2Erkl(){
+  dyn(`
     <div class="sbanner" style="border-color:#6d28d9">
       <div class="sbanner-top" style="background:#6d28d9">
         <div class="sbanner-num">3</div>
-        <div>
-          <div class="sbanner-t">STUFE 3 — AUFGABE 6</div>
-          <div class="sbanner-s">Die Geheimbotschaft von NOVA-7!</div>
-        </div>
+        <div><div class="sbanner-t">STUFE 3 · AUFGABE 8 — GEHEIMBOTSCHAFT</div>
+        <div class="sbanner-s">Die finale Nachricht von NOVA-7!</div></div>
       </div>
       <div class="sbanner-body">
-        <p>NOVA-7 sendet die letzte Nachricht komplett im <strong>8-Bit-ASCII-Binärcode</strong>. Jede 8-stellige Binärzahl ist ein Zeichen.</p>
+        <p>NOVA-7 sendet sein Geheimwort komplett im 8-Bit-ASCII-Code. Jede 8-stellige Binärzahl ist ein Zeichen.</p>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-lbl">VORGEHENSWEISE IN 3 SCHRITTEN</div>
-      <div class="hint-step" style="margin-bottom:10px">
-        <div class="hint-num" style="background:var(--pu-bg);border-color:var(--pu2);color:var(--pu)">1</div>
-        <div><strong>8-Bit → Dezimal:</strong> Identifiziere die aktiven Stellen (8-Bit-Werte: 128, 64, 32, 16, 8, 4, 2, 1). Addiere ihre Werte.</div>
-      </div>
-      <div class="hint-step" style="margin-bottom:10px">
-        <div class="hint-num" style="background:var(--pu-bg);border-color:var(--pu2);color:var(--pu)">2</div>
-        <div><strong>Dezimal → ASCII-Tabelle:</strong> Suche die Dezimalzahl in der Tabelle aus Aufgabe 5.</div>
-      </div>
-      <div class="hint-step">
-        <div class="hint-num" style="background:var(--pu-bg);border-color:var(--pu2);color:var(--pu)">3</div>
-        <div><strong>Zeichen aufschreiben.</strong> Euer Geheimwort hat <strong>${G.sec.length} Zeichen</strong> — darunter ein Sonderzeichen!</div>
-      </div>
-      <div class="notice" style="margin-top:12px">
-        ℹ️ Ihr arbeitet hier immer mit <strong>8 Bit</strong> (2⁸=256 mögliche Zeichen) — egal welches ${G.bits}-Bit-System ihr sonst habt!
-      </div>
+      <div class="card-lbl">VORGEHEN</div>
+      <div class="hint-step"><div class="hint-num" style="background:var(--pu-bg);border-color:var(--pu2);color:var(--pu)">1</div>
+        <div>8-Bit ablesen → aktive Stellenwerte (128,64,32,16,8,4,2,1) addieren</div></div>
+      <div class="hint-step" style="margin-top:8px"><div class="hint-num" style="background:var(--pu-bg);border-color:var(--pu2);color:var(--pu)">2</div>
+        <div>Dezimalzahl in ASCII-Tabelle nachschlagen → Zeichen aufschreiben</div></div>
+      <div class="notice" style="margin-top:10px">ℹ️ Das Geheimwort hat <strong>${G.sec.length} Zeichen</strong> — die ersten hast du in Aufgabe 7 schon!</div>
     </div>`);
-  setNav({back:()=>go(13), fwd:()=>go(15)});
+  setNav({back:()=>go(17),fwd:()=>go(19)});
 }
 
-// ═══════════════════════════════════════════════════ A6 AUFG (step 15)
-function renderA6Aufg(){
+function renderS3T2Aufg(){
   const ASCII8=[128,64,32,16,8,4,2,1];
   const chars=Array.from(G.sec);
   const bins=chars.map(ch=>ch.charCodeAt(0).toString(2).padStart(8,'0'));
-  dynHtml(`
+  dyn(`
     <div class="card">
-      <div class="card-lbl">STUFE 3 · AUFGABE 6 — GEHEIMBOTSCHAFT</div>
-      <h3>Entschlüssele die Botschaft!</h3>
-      <p style="font-size:14px;color:var(--ink2);margin-bottom:6px">
-        Lies jeden 8-Bit-Code ab, rechne die Dezimalzahl aus und schlag das Zeichen in der ASCII-Tabelle nach.
-      </p>
-      <div class="notice">
-        ℹ️ Das erste Zeichen hast du in Aufgabe 5 schon — übernehme es direkt!
-      </div>
+      <div class="card-lbl">STUFE 3 · AUFGABE 8 — GEHEIMBOTSCHAFT</div>
+      <h3>Entschlüssele alle Zeichen!</h3>
+      <div class="notice">ℹ️ Die ersten Zeichen kennst du aus Aufgabe 7!</div>
     </div>
-
-    ${bins.map((b,i)=>{
-      const cells=ASCII8.map((pw,pi)=>`
-        <div class="bw-cell">
-          <div class="bw-pow">${pw}</div>
-          <div class="bw-bit ro${b[pi]==='1'?' on':''}">${b[pi]}</div>
-        </div>`).join('');
-      return `<div class="card">
-        <div class="card-lbl">ZEICHEN ${i+1}</div>
-        <div class="bw-wrap">
-          <div class="bw-lbl">EMPFANGENES SIGNAL:</div>
-          <div class="bw">${cells}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
-          <span style="font-size:14px;color:var(--ink2)">Zeichen:</span>
-          <input type="text" maxlength="1" id="a6-${i}-chin"
-            placeholder="?" autocomplete="off"
-            style="width:52px;height:50px;text-align:center;border:2.5px solid var(--brd);
-            border-radius:var(--rs);font-family:'Orbitron',monospace;
-            font-size:22px;font-weight:900;background:var(--panel2);color:var(--ink)">
-        </div>
-        <div style="font-size:12px;color:var(--ink4);margin-top:5px" id="a6-${i}-fb"></div>
-      </div>`;
-    }).join('')}
-
+    ${bins.map((b,i)=>`
+    <div class="card">
+      <div class="card-lbl">ZEICHEN ${i+1}</div>
+      <div class="bw-wrap"><div class="bw-lbl">SIGNAL:</div><div class="bw">${sigRow(b,ASCII8)}</div></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+        <span style="font-size:14px;color:var(--ink2)">Zeichen:</span>
+        ${charInput('s3t2-'+i)}
+      </div>
+      <div style="font-size:12px;color:var(--ink4);margin-top:5px" id="s3t2-${i}-fb"></div>
+    </div>`).join('')}
     <div class="card" style="border-color:#6d28d9">
       <div class="card-lbl" style="color:#6d28d9">EUER GEHEIMWORT</div>
       <div class="slot-row" id="slot-row">
-        ${chars.map((_,i)=>`<div class="slot" id="slot-${i}">
-          <span class="slot-n">Z${i+1}</span>_
-        </div>`).join('')}
+        ${chars.map((_,i)=>`<div class="slot" id="slot-${i}"><span class="slot-n">Z${i+1}</span>_</div>`).join('')}
       </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px">
+      <div style="font-size:12px;color:var(--ink4)" id="chk-s3t2-fb"></div>
+      ${checkBtnHtml('chk-s3t2','chkS3T2()')}
     </div>`);
-  setNav({back:()=>go(14), fwd:checkA6, fwdLabel:'Weiter zum Code →'});
+  setNav({back:()=>go(18),fwd:()=>go(20)});
 }
-
-function checkA6(){
+function chkS3T2(){
   let ok=true;
-  const chars=Array.from(G.sec);
-  chars.forEach((ch,i)=>{
-    const chEl=document.getElementById('a6-'+i+'-chin');
-    const fb=document.getElementById('a6-'+i+'-fb');
+  Array.from(G.sec).forEach((ch,i)=>{
+    const el=document.getElementById('s3t2-'+i);
     const slot=document.getElementById('slot-'+i);
-    const chOk=chEl?.value===ch;
-    if(chOk){
-      if(chEl){chEl.style.borderColor='var(--gn)';chEl.style.background='var(--gn-bg)';chEl.style.color='var(--gn)';}
-      if(fb){fb.textContent='✓ Richtig!';fb.style.color='var(--gn)';}
+    if(el.value===ch){
+      el.style.borderColor='var(--gn)';el.style.background='var(--gn-bg)';el.style.color='var(--gn)';
+      setFb('s3t2-'+i+'-fb','✓',true);
       if(slot){slot.innerHTML=`<span class="slot-n">Z${i+1}</span>${ch}`;slot.className='slot correct';}
     } else {
-      if(chEl)chEl.style.borderColor='var(--rd)';
-      if(fb){fb.textContent='Nicht ganz — schau nochmal in der ASCII-Tabelle.';fb.style.color='var(--rd)';}
-      ok=false;
+      el.style.borderColor='var(--rd)';
+      setFb('s3t2-'+i+'-fb','Nochmal in der Tabelle nachschlagen.',false);ok=false;
     }
   });
-  if(ok) go(16);
+  if(!ok){setFb('chk-s3t2-fb','Noch nicht alle korrekt.',false);return;}
+  setFb('chk-s3t2-fb','✓ Alle korrekt!',true);
+  markCheckBtn('chk-s3t2',2,1);
 }
 
-// ═══════════════════════════════════════════════════ CODE 3 (step 16)
+// ── Code 3 ───────────────────────────────────────────────────────────────
 function renderCode3(){
-  dynHtml(`
+  dyn(`
     <div class="card">
       <div class="card-lbl">STUFE 3 — CODE EINGEBEN</div>
-      <h3 style="color:#6d28d9">🔐 Freischalt-Code Stufe 3 (2 Ziffern)</h3>
+      <h3 style="color:#6d28d9">🔐 Freischalt-Code Stufe 3</h3>
     </div>
-
-    <div class="hint-box">
-      <h4>◈ WIE DU DEN CODE ERMITTELST</h4>
-      <div class="hint-step">
-        <div class="hint-num">1</div>
-        <div>
-          <strong>Codeziffer 1:</strong>
-          Suche das Ausrufezeichen <strong>!</strong> in der ASCII-Tabelle aus Aufgabe 5.
-          Notiere seinen Dezimalwert.
-          Die <strong>Einerstelle</strong> (letzte Ziffer) dieses Wertes ist Codeziffer 1.
-        </div>
-      </div>
-      <div class="hint-step">
-        <div class="hint-num">2</div>
-        <div>
-          <strong>Codeziffer 2:</strong>
-          Zähle alle Zeichen in deinem entschlüsselten Geheimwort aus <strong>Aufgabe 6</strong> —
-          jeden Buchstaben und das <strong>!</strong> einzeln zählen.
-          Die Gesamtanzahl ist Codeziffer 2.
-        </div>
-      </div>
-    </div>
-
+    ${codeDisplay(2)}
     <div class="code-wrap" style="border-color:#6d28d9">
       <h2 style="color:#6d28d9">2-stelligen Code eingeben</h2>
       <div class="code-digits">
         ${[0,1].map(i=>`<input class="cd" type="text" inputmode="numeric" maxlength="1"
-          id="cd3-${i}" placeholder="?" autocomplete="off"
-          oninput="cdInput(this,'cd3',${i},2)"
-          onkeydown="cdKey(event,'cd3',${i},2)">`).join('')}
+          id="c3-${i}" placeholder="?" autocomplete="off"
+          oninput="cdIn(this,'c3',${i},2)" onkeydown="cdKey(event,'c3',${i},2)">`).join('')}
       </div>
-      <div class="code-fb" id="cd3-fb"></div>
-      <button class="btn btn-p" style="background:#6d28d9;margin-top:14px" onclick="submitCode('cd3',2,G.L3,17)">
-        Code prüfen →
-      </button>
+      <div class="code-fb" id="c3-fb"></div>
+      <button class="btn btn-p" style="background:#6d28d9;margin-top:14px"
+        onclick="subCode('c3',2,stageCode(2),21)">Code prüfen →</button>
     </div>`);
-  setNav({back:()=>go(15), fwd:null});
-  setTimeout(()=>document.getElementById('cd3-0')?.focus(),100);
+  setNav({back:()=>go(19)});
+  setTimeout(()=>document.getElementById('c3-0')?.focus(),100);
 }
 
-// ═══════════════════════════════════════════════════ FINAL (step 17)
+// ── Final ─────────────────────────────────────────────────────────────────
 function renderFinal(){
-  step=17; updateProg();
+  step=21;updProg();
   document.getElementById('final-word').textContent=G.sec;
   document.getElementById('final-word').style.color=G.col;
-  setNav({back:goHome, fwd:goHome, fwdLabel:'Neue Mission starten', backLabel:'← Zur Gruppenauswahl'});
+  setNav({back:goHome,fwd:goHome,fwdLbl:'Neue Mission',backLbl:'← Gruppenauswahl'});
   showSc('sc-final');
 }
 
-// ═══════════════════════════════════════════════════ CODE INPUT HELPERS
-function cdInput(el, prefix, idx, total){
+// ═══════════════════════════════════════════════════ SCREEN MAP
+const SCREENS={
+  2:renderS1T1Erkl, 3:renderS1T1Aufg,
+  4:renderS1T2Erkl, 5:renderS1T2Aufg,
+  6:renderS1T3Erkl, 7:renderS1T3Aufg,
+  8:renderS1T4Erkl, 9:renderS1T4Aufg,
+  10:renderCode1,
+  11:renderS2T1Erkl,12:renderS2T1Aufg,
+  13:renderS2T2Erkl,14:renderS2T2Aufg,
+  15:renderCode2,
+  16:renderS3T1Erkl,17:renderS3T1Aufg,
+  18:renderS3T2Erkl,19:renderS3T2Aufg,
+  20:renderCode3,
+  21:renderFinal,
+};
+
+// ═══════════════════════════════════════════════════ CODE INPUT
+function cdIn(el,p,i,total){
   el.value=el.value.replace(/\D/g,'').slice(-1);
-  if(el.value&&idx<total-1){
-    document.getElementById(prefix+'-'+(idx+1))?.focus();
-  }
+  if(el.value&&i<total-1)document.getElementById(p+'-'+(i+1))?.focus();
 }
-function cdKey(e, prefix, idx, total){
-  if(e.key==='Backspace'&&!e.target.value&&idx>0){
-    e.preventDefault();
-    document.getElementById(prefix+'-'+(idx-1))?.focus();
-  }
-  if(e.key==='ArrowRight'&&idx<total-1) document.getElementById(prefix+'-'+(idx+1))?.focus();
-  if(e.key==='ArrowLeft'&&idx>0) document.getElementById(prefix+'-'+(idx-1))?.focus();
-  if(e.key==='Enter'){
-    const btn=document.querySelector(`button[onclick*="submitCode('${prefix}'"]`);
-    btn?.click();
-  }
+function cdKey(e,p,i,total){
+  if(e.key==='Backspace'&&!e.target.value&&i>0){e.preventDefault();document.getElementById(p+'-'+(i-1))?.focus();}
+  if(e.key==='ArrowRight'&&i<total-1)document.getElementById(p+'-'+(i+1))?.focus();
+  if(e.key==='ArrowLeft'&&i>0)document.getElementById(p+'-'+(i-1))?.focus();
+  if(e.key==='Enter')document.querySelector(`button[onclick*="subCode('${p}'"]`)?.click();
 }
-function submitCode(prefix, len, correct, nextStep){
-  const entered=Array.from({length:len},(_,i)=>document.getElementById(prefix+'-'+i).value).join('');
-  const fb=document.getElementById(prefix+'-fb');
+function subCode(p,len,correct,next){
+  const entered=Array.from({length:len},(_,i)=>document.getElementById(p+'-'+i).value).join('');
+  const fb=document.getElementById(p+'-fb');
   if(entered===correct){
-    Array.from({length:len},(_,i)=>document.getElementById(prefix+'-'+i)).forEach(el=>{
-      el.classList.add('ok'); el.classList.remove('err');
-    });
-    fb.textContent='✓ Code korrekt! Stufe '+(nextStep===7?2:nextStep===12?3:'')+(nextStep===17?' abgeschlossen!':' freigeschaltet!');
-    fb.className='code-fb ok';
-    setTimeout(()=>go(nextStep), 900);
+    Array.from({length:len},(_,i)=>document.getElementById(p+'-'+i)).forEach(el=>{el.classList.add('ok');el.classList.remove('err');});
+    fb.textContent='✓ Code korrekt!';fb.className='code-fb ok';
+    setTimeout(()=>go(next),800);
   } else {
-    Array.from({length:len},(_,i)=>document.getElementById(prefix+'-'+i)).forEach(el=>{
-      el.classList.add('err'); el.classList.remove('ok');
-    });
-    fb.textContent='✗ Falscher Code — überprüfe deinen Rechenweg.';
-    fb.className='code-fb err';
-    setTimeout(()=>Array.from({length:len},(_,i)=>document.getElementById(prefix+'-'+i)).forEach(el=>el.classList.remove('err')),900);
+    Array.from({length:len},(_,i)=>document.getElementById(p+'-'+i)).forEach(el=>{el.classList.add('err');el.classList.remove('ok');});
+    fb.textContent='✗ Falscher Code.';fb.className='code-fb err';
+    setTimeout(()=>Array.from({length:len},(_,i)=>document.getElementById(p+'-'+i)).forEach(el=>el.classList.remove('err')),900);
   }
 }
 
 // ═══════════════════════════════════════════════════ INIT
 buildHome();
+
 </script>
 </body>
 </html>
